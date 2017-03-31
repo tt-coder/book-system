@@ -3,6 +3,7 @@
     <meta charset="utf-8">
     <title>蔵書システム</title>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://isbnjs.googlecode.com/svn/trunk/isbn.js"></script>
         <script type="text/javascript" src="http://isbnjs.googlecode.com/svn/trunk/isbn-groups.js"></script>
         <script type="text/javascript" src="script.js"></script>
@@ -11,5 +12,11 @@
     <input type="button" value="スキャン" onclick="scanJAN()"></input>
 
     <div id="jancode">ここにコードが表示</div>
+    <p id="BookTitle"></p>
+    <p id="isbn10"></p>
+    <p id="isbn13"></p>
+    <p id="PublishedDate"></p>
+    <p id="BookThumbnail"></p>
+    <p id="BookDescription"></p>
 </body>
 </html>
