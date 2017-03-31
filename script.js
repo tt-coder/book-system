@@ -11,5 +11,5 @@ window.addEventListener('DOMContentLoaded',function(){
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
     var r = getParameterByName('r')
-    if(r) getElementById('jancode').value = r
+    if(r) getElementById('jancode').innerHTML = r
 },false)
