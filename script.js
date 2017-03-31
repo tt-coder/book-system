@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded',function(){
 },false);
 
 function convertISBN(id){
-  'use strict';
+'use strict';
   var a, b, c, i;
   if (id.length === 13) {
     a = 0;
