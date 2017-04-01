@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded',function(){
     var r = getParameterByName('r')
     if(r){
         //document.getElementById('jancode').innerHTML = r
-        document.getElementById('jancode').textContent = r;
+        document.getElementById('jancode').innerHTML = r;
         getBookData(r);
     }
 },false);
