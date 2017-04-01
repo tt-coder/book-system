@@ -20,6 +20,7 @@ window.addEventListener('DOMContentLoaded',function(){
     }
 },false);
 
+// データ取得
 function getBookData(isbn){
     const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
     $.getJSON(url, function(data) {
