@@ -37,12 +37,12 @@ function getBookData(isbn){
             $("#message").html('<p class="bg-warning" id="warning">該当する書籍がありません。</p>');
             $('#message > p').fadeOut(3000);
         }else{
-            $("#BookTitle").text(data.items[0].volumeInfo.title);
-            $("#isbn13").text(data.items[0].volumeInfo.industryIdentifiers[0].identifier);
-            $("#isbn10").text(data.items[0].volumeInfo.industryIdentifiers[1].identifier);
-            $("#BookAuthor").text(data.items[0].volumeInfo.authors[0]);
-            $("#PublishedDate").text(data.items[0].volumeInfo.publishedDate);
-            $("#BookDescription").text(data.items[0].volumeInfo.description);
+            $("#BookTitle").html(data.items[0].volumeInfo.title);
+            $("#isbn13").html(data.items[0].volumeInfo.industryIdentifiers[0].identifier);
+            $("#isbn10").html(data.items[0].volumeInfo.industryIdentifiers[1].identifier);
+            $("#BookAuthor").html(data.items[0].volumeInfo.authors[0]);
+            $("#PublishedDate").html(data.items[0].volumeInfo.publishedDate);
+            $("#BookDescription").html(data.items[0].volumeInfo.description);
             $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
         }
     });
