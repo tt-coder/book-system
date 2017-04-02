@@ -1,7 +1,13 @@
 // バーコードスキャン
 function scanJAN(){
-    var s = 'pic2shop://scan?callback='+encodeURIComponent(location.origin+location.pathname+'?r=EAN')
-    document.location = s
+    if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0) { // iOS
+        var s = 'pic2shop://scan?callback='+encodeURIComponent(location.origin+location.pathname+'?r=EAN')
+        document.location = s
+    }else if(navigator.userAgent.indexOf('Android') > 0){ // Android
+
+    }else{ // PC
+
+    }
 };
 
 // バーコードから番号を読み取る
@@ -14,7 +20,6 @@ window.addEventListener('DOMContentLoaded',function(){
     }
     var r = getParameterByName('r')
     if(r){
-        //document.getElementById('jancode').innerHTML = r
         document.getElementById('jancode').innerHTML = r;
         getBookData(r);
     }
