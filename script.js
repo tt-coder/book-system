@@ -13,6 +13,27 @@ function scanJAN(){
 function onButtonJAN(){
     var isbn = document.getElementById("jancode").value;
     getBookData(isbn);
+    postToServer(isbn);
+}
+
+function postToServer(isbn){
+    var json = {
+        "username": "",
+        "event": "", // borrow か returnが入る
+        "isbn": ""
+    };
+    for(var i=0;i<document.property.username.length;i++){
+        if(document.property.username[i].checked){
+            json.username = document.property.username[i].value;
+        }
+    }
+    for(var i=0;i<document.property.event.length;i++){
+        if(document.property.event[i].checked){
+            json.event = document.property.event[i].value;
+        }
+    }
+    json.isbn = isbn;
+    console.log(json);
 }
 
 // バーコードから番号を読み取る
@@ -27,6 +48,7 @@ window.addEventListener('DOMContentLoaded',function(){
     if(r){
         document.getElementById('jancode').innerHTML = r;
         getBookData(r);
+        postToServer(isbn);
     }
 },false);
 

@@ -34,20 +34,22 @@
     </div>
 </header>
     <div class="container">
-        <div class="row">            
-            <div class="radio">
-                <label><input type="radio" name="status" id="radio1" value="radio1"> 貸出 </label>
-            </div>
-            <div class="radio">
-                <label><input type="radio" name="status" id="radio2" value="radio2"> 返却 </label>
-            </div>
-            <br>
-            <div class="radio">
-                <label><input type="radio" name="username" id="radio1" value="radio1"> 名前1 </label>
-            </div>
-            <div class="radio">
-                <label><input type="radio" name="username" id="radio2" value="radio2"> 名前2 </label>
-            </div>
+        <div class="row">
+            <form name="property">          
+                <div class="radio">
+                    <label><input type="radio" name="username" id="radio1" value="testuser1"> ユーザー1 </label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="username" id="radio2" value="testuser2"> ユーザー2 </label>
+                </div>
+                <br>
+                <div class="radio">
+                    <label><input type="radio" name="event" id="radio1" value="borrow"> 貸出 </label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="event" id="radio2" value="return"> 返却 </label>
+                </div>
+            </form>
             <div>
                 <input type="button" value="スキャン" onclick="scanJAN()"></input>
             </div>
@@ -56,6 +58,9 @@
                 <input type="button" value="実行" onclick="onButtonJAN()"></input>
             </div>
             <div>テスト用ISBN：9784797377026</div>
+            <div>
+                <input type="button" value="Debug" onclick="postToServer()"></input>
+            </div>
             <p id="BookTitle"></p>
             <p id="BookAuthor"></p>
             <p id="isbn10"></p>
