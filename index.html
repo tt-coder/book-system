@@ -1,23 +1,59 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <meta charset="utf-8">
-    <title>蔵書システム</title>
     <head>
-        <script src="jquery-3.2.0.min.js"></script>
-        <script type="text/javascript" src="http://isbnjs.googlecode.com/svn/trunk/isbn.js"></script>
-        <script type="text/javascript" src="http://isbnjs.googlecode.com/svn/trunk/isbn-groups.js"></script>
-        <script type="text/javascript" src="script.js"></script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>蔵書システム</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <script src="js/jquery-3.2.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="http://isbnjs.googlecode.com/svn/trunk/isbn.js"></script>
+        <script src="http://isbnjs.googlecode.com/svn/trunk/isbn-groups.js"></script>
+        <script src="script.js"></script>
     </head>
 <body>
-    <input type="button" value="スキャン" onclick="scanJAN()"></input>
-
-    <div id="jancode">ここにコードが表示</div>
-    <p id="BookTitle"></p>
-    <p id="BookAuthor"></p>
-    <p id="isbn10"></p>
-    <p id="isbn13"></p>
-    <p id="PublishedDate"></p>
-    <p id="BookThumbnail"></p>
-    <p id="BookDescription"></p>
+<header>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">蔵書システム</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Top</a></li>
+                    <li><a href="/">貸出</a></li>
+                    <li><a href="/">返却</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+    <div class="container">
+        <div class="row">            
+            <div class="radio">
+                <label><input type="radio" name="radio" id="radio1" value="radio1"> 名前1 </label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="radio" id="radio2" value="radio2"> 名前2 </label>
+            </div>
+            <input type="button" value="スキャン" onclick="scanJAN()"></input>
+            <div id="jancode">ここにISBNコードが表示</div>
+            <p id="BookTitle"></p>
+            <p id="BookAuthor"></p>
+            <p id="isbn10"></p>
+            <p id="isbn13"></p>
+            <p id="PublishedDate"></p>
+            <p id="BookThumbnail"></p>
+            <p id="BookDescription"></p>
+        </div>
+    </div>
+    
 </body>
 </html>
