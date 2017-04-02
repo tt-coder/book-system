@@ -4,7 +4,7 @@ function scanJAN(){
         var s = 'pic2shop://scan?callback='+encodeURIComponent(location.origin+location.pathname+'?r=EAN')
         document.location = s
     }else if(navigator.userAgent.indexOf('Android') > 0){ // Android
-
+        // getBookData(取得したISBNの番号)とすれば、書籍情報の表示ができる
     }else{ // PC
 
     }
