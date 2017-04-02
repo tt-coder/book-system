@@ -10,6 +10,11 @@ function scanJAN(){
     }
 };
 
+function onButtonJAN(){
+    var isbn = document.getElementById("jancode").value;
+    getBookData(isbn);
+}
+
 // バーコードから番号を読み取る
 window.addEventListener('DOMContentLoaded',function(){
     function getParameterByName(name) {

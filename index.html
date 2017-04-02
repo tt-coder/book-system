@@ -9,8 +9,6 @@
         <link href="css/main.css" rel="stylesheet">
         <script src="js/jquery-3.2.0.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="http://isbnjs.googlecode.com/svn/trunk/isbn.js"></script>
-        <script src="http://isbnjs.googlecode.com/svn/trunk/isbn-groups.js"></script>
         <script src="script.js"></script>
     </head>
 <body>
@@ -55,6 +53,7 @@
             </div>
             <div>
                 <input type="text" id="jancode" placeholder="スキャンまたはISBN手打ち"></input>
+                <input type="button" value="実行" onclick="onButtonJAN()"></input>
             </div>
             <div>テスト用ISBN：9784797377026</div>
             <p id="BookTitle"></p>
