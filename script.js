@@ -17,23 +17,40 @@ function onButtonJAN(){
 }
 
 function postToServer(isbn){
-    var json = {
-        "username": "",
-        "event": "", // borrow か returnが入る
-        "isbn": ""
+    var nowUserName, nowEvent;
+    function getProperty(){
+        for(var i=0;i<document.property.username.length;i++){
+            if(document.property.username[i].checked){
+                nowUserName = document.property.username[i].value;
+            }
+        }
+        for(var i=0;i<document.property.event.length;i++){
+            if(document.property.event[i].checked){
+                nowEvent = document.property.event[i].value;
+            }
+        }
+    }
+    getProperty();
+    var data = {
+            username: nowUserName,
+            event: nowEvent,
+            isbn: isbn
     };
-    for(var i=0;i<document.property.username.length;i++){
-        if(document.property.username[i].checked){
-            json.username = document.property.username[i].value;
+    console.log(data);
+    var hostURL = "";
+    $.ajax({
+        url: hostURL,
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(data),
+        timeout: 10000,
+        success: function(data){
+            alert("OK");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert("error");
         }
-    }
-    for(var i=0;i<document.property.event.length;i++){
-        if(document.property.event[i].checked){
-            json.event = document.property.event[i].value;
-        }
-    }
-    json.isbn = isbn;
-    console.log(json);
+    });
 }
 
 // バーコードから番号を読み取る
