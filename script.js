@@ -97,3 +97,38 @@ function getBookData(isbn){
         }
     });
 };
+
+function memberSet(){
+    var nameStaff = [
+        "staff_1", "staff_2"
+    ];
+
+    var nameM0 = [
+        "M0_1", "M0_2", "M0_3", "M0_4"
+    ];
+    
+    var nameB4 = [
+        "B4_1", "B4_2", "B4_3"
+    ];
+
+    var nameB3 = [
+        "B3_1", "B3_2", "B3_3"
+    ];
+
+    var selectGrade = document.forms.test.grade;
+    var selectName = document.forms.test.username;
+    selectName.options.length = 0;
+
+    function setIndex(array){
+        for(var i=0;i<array.length;i++){
+            selectName.options[i] = new Option(array[i]);
+        }
+    }
+    switch(selectGrade.selectedIndex){
+        case 0: selectName.options.length = 0; break;
+        case 1: setIndex(nameStaff); break;
+        case 2: setIndex(nameM0); break;
+        case 3: setIndex(nameB4); break;
+        case 4: setIndex(nameB3); break;
+    }
+}

@@ -22,6 +22,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
@@ -29,6 +32,9 @@
                     <li><a href="index.html">Top</a></li>
                     <li><a href="index.html">貸出・返却</a></li>
                     <li><a href="index.html">貸出リスト</a></li>
+                    <li><a href="index.html">貸出履歴</a></li>
+                    <li><a href="index.html">蔵書一覧</a></li>
+                    <li><a href="index.html">書籍登録</a></li>
                 </ul>
             </div>
         </div>
@@ -51,6 +57,19 @@
                 <div class="radio">
                     <label><input type="radio" name="event" id="radio2" value="return"> 返却 </label>
                 </div>
+            </form>
+            <form name="test">
+                <select name="grade" onchange="memberSet()">
+                    <option value = "default">選択してください</option>
+                    <option value = "staff">スタッフ</option>
+                    <!-- <option value = "M2">M2</option> -->
+                    <!-- <option value = "M1">M1</option> -->
+                    <option value = "M0">M0</option>
+                    <option value = "B4">B4</option>
+                    <option value = "B3">B3</option>
+                </select>
+                <select name="username">
+                </select>
             </form>
             <div>
                 <input type="button" value="スキャン" onclick="scanJAN()"></input>
