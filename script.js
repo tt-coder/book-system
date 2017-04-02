@@ -10,15 +10,17 @@ function scanJAN(){
     }
 };
 
+// ISBN手打ち時の処理
 function onButtonJAN(){
     var isbn = document.getElementById("jancode").value;
     getBookData(isbn);
     postToServer(isbn);
 }
 
+// サーバーにPOST
 function postToServer(isbn){
     var nowUserName, nowEvent;
-    function getProperty(){
+    function getProperty(){ // 選択されたラジオボタンの値を読み取る
         for(var i=0;i<document.property.username.length;i++){
             if(document.property.username[i].checked){
                 nowUserName = document.property.username[i].value;
@@ -36,19 +38,18 @@ function postToServer(isbn){
             event: nowEvent,
             isbn: isbn
     };
-    console.log(data);
-    var hostURL = "";
+    console.log(JSON.stringify(data));
+    var hostURL = ""; // サーバーのURL
     $.ajax({
         url: hostURL,
         type: "POST",
-        dataType: "json",
         data: JSON.stringify(data),
         timeout: 10000,
-        success: function(data){
+        success: function(){
             alert("OK");
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert("error");
+            alert(errorThrown);
         }
     });
 }
