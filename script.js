@@ -47,9 +47,13 @@ function postToServer(isbn){
         timeout: 10000,
         success: function(){
             alert("OK");
+            var current = window.location;
+            window.location.href = "/borrow-return/";
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
             alert(errorThrown);
+            var current = window.location;
+            window.location.href = current + "/borrow-return/";
         }
     });
 }
