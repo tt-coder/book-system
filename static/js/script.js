@@ -18,10 +18,24 @@ function onButtonJAN(){
 
 }
 
+function debugtest(){
+    document.getElementById("jancode").value = "aaa";
+}
+
 function getUserName(){
     var selectName = document.forms.test.username;
     var index = selectName.selectedIndex;
     return selectName.options[index].text;
+}
+
+function getCurrentDir(){
+    function getDir(place, n) {
+        return place.pathname.replace(new RegExp("(?:\\\/+[^\\\/]*){0," + ((n || 0) + 1) + "}$"), "/");
+    }
+    var local = window.location;
+	var url = local.origin;
+    return url + getDir(local); // 現在のディレクトリ
+    //url + getDir(local,1);
 }
 
 // サーバーにPOST
@@ -50,6 +64,7 @@ function postToServer(isbn){
     };
     console.log(JSON.stringify(data));
     var hostURL = ""; // サーバーのURL
+    var current = getCurrentDir();
     $.ajax({
         url: hostURL,
         type: "POST",
@@ -57,13 +72,12 @@ function postToServer(isbn){
         timeout: 10000,
         success: function(){
             alert("OK");
-            var current = window.location;
-            window.location.href = "/borrow-return/";
+            window.location.href = current + "borrow-return.html";
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
             alert(errorThrown);
-            var current = window.location;
-            window.location.href = current + "/borrow-return/";
+            //window.location.href = current + "borrow-return/";
+            window.location.href = current + "borrow-return.html";
         }
     });
 }
@@ -80,7 +94,8 @@ window.addEventListener('DOMContentLoaded',function(){
     if(r){
         document.getElementById('jancode').innerHTML = r;
         getBookData(r);
-        postToServer(isbn);
+        document.getElementById("jancode").value = r;
+        postToServer(r);
     }
 },false);
 
