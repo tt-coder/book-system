@@ -13,19 +13,28 @@ function scanJAN(){
 // ISBN手打ち時の処理
 function onButtonJAN(){
     var isbn = document.getElementById("jancode").value;
-    getBookData(isbn);
+    getBookData(isbn)
     postToServer(isbn);
+
+}
+
+function getUserName(){
+    var selectName = document.forms.test.username;
+    var index = selectName.selectedIndex;
+    return selectName.options[index].text;
 }
 
 // サーバーにPOST
 function postToServer(isbn){
     var nowUserName, nowEvent;
     function getProperty(){ // 選択されたラジオボタンの値を読み取る
+        /*
         for(var i=0;i<document.property.username.length;i++){
             if(document.property.username[i].checked){
                 nowUserName = document.property.username[i].value;
             }
         }
+        */
         for(var i=0;i<document.property.event.length;i++){
             if(document.property.event[i].checked){
                 nowEvent = document.property.event[i].value;
@@ -33,6 +42,7 @@ function postToServer(isbn){
         }
     }
     getProperty();
+    nowUserName = getUserName();
     var data = {
             username: nowUserName,
             event: nowEvent,
