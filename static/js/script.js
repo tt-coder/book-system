@@ -1,3 +1,5 @@
+var title = "";
+
 // バーコードスキャン
 function scanJAN(){
     if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0) { // iOS
@@ -19,7 +21,8 @@ function onButtonJAN(){
 }
 
 function debugtest(){
-   document.getElementById("property").style.display="none";
+    var selectName = document.forms.property.username;
+    console.log(selectName.selectedIndex);
 }
 
 function getUserName(){
@@ -38,18 +41,21 @@ function getCurrentDir(){
     //url + getDir(local,1);
 }
 
-// サーバーにPOST
-function postToServer(isbn){
-    var nowUserName, nowEvent;
-    function getProperty(){ // 選択されたラジオボタンの値を読み取る
-        for(var i=0;i<document.property.event.length;i++){
-            if(document.property.event[i].checked){
-                nowEvent = document.property.event[i].value;
-            }
+// 選択されたラジオボタンの値を読み取る
+function getProperty(){
+    var nowEvent = "";
+    for(var i=0;i<document.property.event.length;i++){
+        if(document.property.event[i].checked){
+            nowEvent = document.property.event[i].value;
         }
     }
-    getProperty();
-    nowUserName = getUserName();
+    return nowEvent;
+}
+
+// サーバーにPOST
+function postToServer(isbn){
+    var nowUserName = getUserName();
+    var nowEvent = getProperty();
     var data = {
             username: nowUserName,
             event: nowEvent,
@@ -70,34 +76,16 @@ function postToServer(isbn){
         data: JSON.stringify(data),
         timeout: 10000,
         success: function(){
-            const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-            var title = "";
-            $.getJSON(url, function(data) {
-                if(!data.totalItems) {
-                    alert("書籍が見つかりませんでした。")
-                }else{
-                    title = data.items[0].volumeInfo.title;
-                    var result = confirm(title + dialog);
-                    if(result){
-                        window.location.href = current + "borrow-return.html";
-                    }
-                }
-            });
+            var result = confirm(title + dialog);
+            if(result){
+                window.location.href = current + "borrow-return.html";
+            }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-            var title = "";
-            $.getJSON(url, function(data) {
-                if(!data.totalItems) {
-                    alert("書籍が見つかりませんでした。")
-                }else{
-                    title = data.items[0].volumeInfo.title;
-                    var result = confirm(title + dialog);
-                    if(result){
-                        window.location.href = current + "borrow-return.html";
-                    }
-                }
-            });
+            var result = confirm(title + dialog);
+            if(result){
+                window.location.href = current + "borrow-return.html";
+            }
         }
     });
 }
@@ -114,9 +102,7 @@ window.addEventListener('DOMContentLoaded',function(){
     var r = getParameterByName('r')
     if(r){
         document.getElementById('jancode').innerHTML = r;
-        getBookData(r);
         document.getElementById("jancode").value = r;
-        postToServer(r);
     }
 },false);
 
@@ -124,26 +110,19 @@ window.addEventListener('DOMContentLoaded',function(){
 function getBookData(isbn){
     const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
     $.getJSON(url, function(data) {
-        if(!data.totalItems) {
-            $("#isbn").val("");
+        if(!data.totalItems) { // 書籍が見つからないとき
             $("#BookTitle").text("");
             $("#BookAuthor").text("");
-            $("#isbn10").text("");
-            $("#isbn13").text("");
             $("#PublishedDate").text("");
             $("#BookThumbnail").text("");
-            $("#BookDescription").text("");
-            $("#BookMemo").val("");
-            $("#message").html('<p class="bg-warning" id="warning">該当する書籍がありません。</p>');
-            $('#message > p').fadeOut(3000);
-        }else{
+            alert("書籍が見つかりませんでした。\nISBNを確認してください。")
+        }else{ // 書籍が見つかったとき
+            title = data.items[0].volumeInfo.title;
             $("#BookTitle").html(data.items[0].volumeInfo.title);
-            $("#isbn13").html(data.items[0].volumeInfo.industryIdentifiers[0].identifier);
-            $("#isbn10").html(data.items[0].volumeInfo.industryIdentifiers[1].identifier);
             $("#BookAuthor").html(data.items[0].volumeInfo.authors[0]);
             $("#PublishedDate").html(data.items[0].volumeInfo.publishedDate);
-            $("#BookDescription").html(data.items[0].volumeInfo.description);
             $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
+            document.getElementById("property").style.display = "block";
         }
     });
 };
@@ -167,7 +146,6 @@ function checkNumber(obj){
         return false;
     }else{
         getBookData(num);
-        document.getElementById("property").style.display = "block";
     }
 }
 
@@ -215,6 +193,15 @@ function subValue(){
     var nowValue = document.getElementById("booknum").value;
     if(nowValue != "0"){
         document.getElementById("booknum").value = parseInt(nowValue, 10) - 1;
+    }
+}
+
+function checkProperty(){
+    var selectName = document.forms.property.username;
+    var index = selectName.selectedIndex;
+    var nowEvent = getProperty();
+    if(index != -1 && nowEvent != ""){
+        document.getElementById("runbutton").disabled = false;
     }
 }
 
