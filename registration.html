@@ -44,24 +44,49 @@
     <div class="container">
         <div class="row">
             <div>
-                <input type="button" value="スキャン" onclick="scanJAN()"></input>
-            </div>
-            <div>
-                <input type="text" id="jancode" placeholder="スキャンまたはISBN手打ち"></input>
-                <input type="button" value="実行" onclick="onButtonJAN()"></input>
-            </div>
-            <div>テスト用ISBN：9784797377026</div>
-            <div>
+                テスト用ISBN：9784797377026
                 <input type="button" value="Debug" onclick="debugtest()"></input>
             </div>
-            <div>
-                <input type="number" id="booknum" value="1"></input>
-                <input type="button" value="+" onclick="addValue()"></input>
-                <input type="button" value="-" onclick="subValue()"></input>
-            </div>
-            <div>
-                <input type="button" id="register" value="登録" onclick="registerBook"></input>
-            </div>
+            <form>
+                <ul>
+                    <li class="jancode">
+                        <label for="jancode">ISBN</label>
+                        <input type="text" id="jancode" onblur="checkNumber(this)" placeholder="スキャンまたはISBN手打ち" size="23" maxlength="13"></input>
+                        <input type="button" value="スキャン" onclick="scanJAN()"></input>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="title">
+                        <label for="title">タイトル</label>
+                        <input type="text" id="BookTitle" placeholder="C言語入門"></input>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="author">
+                        <label for="author">著者</label>
+                        <input type="text" id="BookAuthor" placeholder="山田太郎"></input>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="title">
+                        <label for="title">発行日</label>
+                        <input type="text" id="PublishedDate" placeholder="2017-04-01"></input>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="bookvalue">
+                        <label for="boolvalue">冊数</label>
+                        <input type="text" id="booknum" value="1" size="2"></input>
+                        <input type="button" value="+" onclick="addValue()"></input>
+                        <input type="button" value="-" onclick="subValue()"></input>
+                    </li>
+                </ul>
+                <ul>
+                    <input type="button" id="register" value="登録" onclick="registerBook"></input>
+                </ul>
+            </form>
+            <form id="property">
+            </form>
         </div>
     </div>
 </body>

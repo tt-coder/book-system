@@ -15,7 +15,6 @@ function scanJAN(){
 // ISBN手打ち時の処理
 function onButtonJAN(){
     var isbn = document.getElementById("jancode").value;
-    //getBookData(isbn)
     postToServer(isbn);
 }
 
@@ -119,8 +118,11 @@ function getBookData(isbn){
         }else{ // 書籍が見つかったとき
             title = data.items[0].volumeInfo.title;
             $("#BookTitle").html(data.items[0].volumeInfo.title);
+            $("#BookTitle").val(data.items[0].volumeInfo.title);
             $("#BookAuthor").html(data.items[0].volumeInfo.authors[0]);
+            $("#BookAuthor").val(data.items[0].volumeInfo.authors[0]);
             $("#PublishedDate").html(data.items[0].volumeInfo.publishedDate);
+            $("#PublishedDate").val(data.items[0].volumeInfo.publishedDate);
             $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
             document.getElementById("property").style.display = "block";
         }
@@ -184,6 +186,15 @@ function memberSet(){
     }
 }
 
+function checkProperty(){
+    var selectName = document.forms.property.username;
+    var index = selectName.selectedIndex;
+    var nowEvent = getProperty();
+    if(index != -1 && nowEvent != ""){
+        document.getElementById("runbutton").disabled = false;
+    }
+}
+
 function addValue(){
     var nowValue = document.getElementById("booknum").value;
     document.getElementById("booknum").value = parseInt(nowValue, 10) + 1;
@@ -193,15 +204,6 @@ function subValue(){
     var nowValue = document.getElementById("booknum").value;
     if(nowValue != "0"){
         document.getElementById("booknum").value = parseInt(nowValue, 10) - 1;
-    }
-}
-
-function checkProperty(){
-    var selectName = document.forms.property.username;
-    var index = selectName.selectedIndex;
-    var nowEvent = getProperty();
-    if(index != -1 && nowEvent != ""){
-        document.getElementById("runbutton").disabled = false;
     }
 }
 
