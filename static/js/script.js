@@ -123,6 +123,8 @@ function getBookData(isbn){
             $("#BookAuthor").val(data.items[0].volumeInfo.authors[0]);
             $("#PublishedDate").html(data.items[0].volumeInfo.publishedDate);
             $("#PublishedDate").val(data.items[0].volumeInfo.publishedDate);
+            $("#Publisher").html(data.items[0].volumeInfo.publisher);
+            $("#Publisher").val(data.items[0].volumeInfo.publisher);
             $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
             document.getElementById("property").style.display = "block";
         }
