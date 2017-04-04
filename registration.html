@@ -34,15 +34,34 @@
                     <li><a href="index.html">貸出リスト</a></li>
                     <li><a href="index.html">貸出履歴</a></li>
                     <li><a href="index.html">蔵書一覧</a></li>
-                    <li><a href="index.html">書籍登録</a></li>
+                    <li><a href="registration.html">書籍登録</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </header>
+
     <div class="container">
         <div class="row">
-            <p>{{text1}}</p>
+            <div>
+                <input type="button" value="スキャン" onclick="scanJAN()"></input>
+            </div>
+            <div>
+                <input type="text" id="jancode" placeholder="スキャンまたはISBN手打ち"></input>
+                <input type="button" value="実行" onclick="onButtonJAN()"></input>
+            </div>
+            <div>テスト用ISBN：9784797377026</div>
+            <div>
+                <input type="button" value="Debug" onclick="debugtest()"></input>
+            </div>
+            <div>
+                <input type="number" id="booknum" value="1"></input>
+                <input type="button" value="+" onclick="addValue()"></input>
+                <input type="button" value="-" onclick="subValue()"></input>
+            </div>
+            <div>
+                <input type="button" id="register" value="登録" onclick="registerBook"></input>
+            </div>
         </div>
     </div>
 </body>

@@ -34,7 +34,7 @@
                     <li><a href="index.html">貸出リスト</a></li>
                     <li><a href="index.html">貸出履歴</a></li>
                     <li><a href="index.html">蔵書一覧</a></li>
-                    <li><a href="index.html">書籍登録</a></li>
+                    <li><a href="registration.html">書籍登録</a></li>
                 </ul>
             </div>
         </div>
@@ -44,14 +44,6 @@
         <div class="row">
             <!-- ラジオボタン -->
             <form name="property">
-                <!--
-                <div class="radio">
-                    <label><input type="radio" name="username" id="radio1" value="testuser1"> ユーザー1 </label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="username" id="radio2" value="testuser2"> ユーザー2 </label>
-                </div>
-                -->
                 <br>
                 <div class="radio">
                     <label><input type="radio" name="event" id="radio1" value="borrow"> 貸出 </label>
@@ -59,8 +51,6 @@
                 <div class="radio">
                     <label><input type="radio" name="event" id="radio2" value="return"> 返却 </label>
                 </div>
-            </form>
-            <form name="test">
                 <select name="grade" onchange="memberSet()">
                     <option value = "default">選択してください</option>
                     <option value = "staff">スタッフ</option>

@@ -19,11 +19,21 @@ function onButtonJAN(){
 }
 
 function debugtest(){
-    document.getElementById("jancode").value = "aaa";
+    isbn = "9784797377026";
+    const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
+    var title = "";
+    $.getJSON(url, function(data) {
+        if(!data.totalItems) {
+            title = "";
+        }else{
+            title = data.items[0].volumeInfo.title;
+            console.log(title);
+        }
+    });
 }
 
 function getUserName(){
-    var selectName = document.forms.test.username;
+    var selectName = document.forms.property.username;
     var index = selectName.selectedIndex;
     return selectName.options[index].text;
 }
@@ -42,13 +52,6 @@ function getCurrentDir(){
 function postToServer(isbn){
     var nowUserName, nowEvent;
     function getProperty(){ // 選択されたラジオボタンの値を読み取る
-        /*
-        for(var i=0;i<document.property.username.length;i++){
-            if(document.property.username[i].checked){
-                nowUserName = document.property.username[i].value;
-            }
-        }
-        */
         for(var i=0;i<document.property.event.length;i++){
             if(document.property.event[i].checked){
                 nowEvent = document.property.event[i].value;
@@ -65,19 +68,46 @@ function postToServer(isbn){
     console.log(JSON.stringify(data));
     var hostURL = ""; // サーバーのURL
     var current = getCurrentDir();
+    var dialog = "";
+    if(nowEvent == "borrow"){
+        dialog = "　を借りてもいいですか？"
+    }else if (nowEvent == "return"){
+        dialog = "　を返却してもいいですか？"
+    }
     $.ajax({
         url: hostURL,
         type: "POST",
         data: JSON.stringify(data),
         timeout: 10000,
         success: function(){
-            alert("OK");
-            window.location.href = current + "borrow-return.html";
+            const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
+            var title = "";
+            $.getJSON(url, function(data) {
+                if(!data.totalItems) {
+                    alert("書籍が見つかりませんでした。")
+                }else{
+                    title = data.items[0].volumeInfo.title;
+                    var result = confirm(title + dialog);
+                    if(result){
+                        window.location.href = current + "borrow-return.html";
+                    }
+                }
+            });
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert(errorThrown);
-            //window.location.href = current + "borrow-return/";
-            window.location.href = current + "borrow-return.html";
+            const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
+            var title = "";
+            $.getJSON(url, function(data) {
+                if(!data.totalItems) {
+                    alert("書籍が見つかりませんでした。")
+                }else{
+                    title = data.items[0].volumeInfo.title;
+                    var result = confirm(title + dialog);
+                    if(result){
+                        window.location.href = current + "borrow-return.html";
+                    }
+                }
+            });
         }
     });
 }
@@ -127,6 +157,18 @@ function getBookData(isbn){
     });
 };
 
+function getBookTitle(isbn){
+    const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
+    var title = "";
+    $.getJSON(url, function(data) {
+        if(!data.totalItems) {
+            title = "";
+        }else{
+            title = data.items[0].volumeInfo.title;
+        }
+    });
+}
+
 function memberSet(){
     var nameStaff = [
         "staff_1", "staff_2"
@@ -144,8 +186,8 @@ function memberSet(){
         "B3_1", "B3_2", "B3_3"
     ];
 
-    var selectGrade = document.forms.test.grade;
-    var selectName = document.forms.test.username;
+    var selectGrade = document.forms.property.grade;
+    var selectName = document.forms.property.username;
     selectName.options.length = 0;
 
     function setIndex(array){
@@ -160,4 +202,21 @@ function memberSet(){
         case 3: setIndex(nameB4); break;
         case 4: setIndex(nameB3); break;
     }
+}
+
+function addValue(){
+    var nowValue = document.getElementById("booknum").value;
+    document.getElementById("booknum").value = parseInt(nowValue, 10) + 1;
+}
+
+function subValue(){
+    var nowValue = document.getElementById("booknum").value;
+    if(nowValue != "0"){
+        document.getElementById("booknum").value = parseInt(nowValue, 10) - 1;
+    }
+}
+
+function registerBook(){
+    var isbn = document.getElementById("jancode").value;
+
 }
