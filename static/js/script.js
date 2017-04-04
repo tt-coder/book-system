@@ -114,8 +114,8 @@ function getBookData(isbn){
             $("#BookAuthor").text("");
             $("#PublishedDate").text("");
             $("#BookThumbnail").text("");
-            //$("#Publisher").text("");
-            //document.getElementById("property").style.display = "none";
+            $("#Publisher").text("");
+            document.getElementById("property").style.display = "none";
             alert("書籍が見つかりませんでした。\nISBNを確認してください。");
         }else{ // 書籍が見つかったとき
             title = data.items[0].volumeInfo.title;
@@ -125,8 +125,8 @@ function getBookData(isbn){
             $("#BookAuthor").val(data.items[0].volumeInfo.authors[0]);
             $("#PublishedDate").html(data.items[0].volumeInfo.publishedDate);
             $("#PublishedDate").val(data.items[0].volumeInfo.publishedDate);
-            //$("#Publisher").html(data.items[0].volumeInfo.publisher);
-            //$("#Publisher").val(data.items[0].volumeInfo.publisher);
+            $("#Publisher").html(data.items[0].volumeInfo.publisher);
+            $("#Publisher").val(data.items[0].volumeInfo.publisher);
             $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
             document.getElementById("property").style.display = "block";
         }
