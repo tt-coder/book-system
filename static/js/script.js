@@ -15,9 +15,8 @@ function scanJAN(){
 // ISBN手打ち時の処理
 function onButtonJAN(){
     var isbn = document.getElementById("jancode").value;
-    getBookData(isbn)
+    //getBookData(isbn)
     postToServer(isbn);
-
 }
 
 function debugtest(){
@@ -103,6 +102,7 @@ window.addEventListener('DOMContentLoaded',function(){
     if(r){
         document.getElementById('jancode').innerHTML = r;
         document.getElementById("jancode").value = r;
+        getBookData(r);
     }
 },false);
 
