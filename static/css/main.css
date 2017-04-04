@@ -3,16 +3,30 @@ body {
 }
 
 /* header */
-/*
 .navbar {
-    min-height: 40px !important
+    min-height: 0px !important;
+    font-size: 0.9em;
+    border-bottom: 1px solid #dfe6d9;
+
 }
 
 .navbar-brand {
-    height: 40px;
-    padding: 10px 15px;
+    height: auto;
+    padding: 15px 0 0 0;
 }
-*/
+
+.navbar-toggle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nav>li>a{
+    display: inline-block;
+    margin: 0 !important;
+    padding: 15px !important;
+    border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+}
 
 /* 登録画面 */
 #registration ul li{
