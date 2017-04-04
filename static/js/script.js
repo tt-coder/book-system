@@ -115,8 +115,8 @@ function getBookData(isbn){
             $("#PublishedDate").text("");
             $("#BookThumbnail").text("");
             //$("#Publisher").text("");
-            alert("書籍が見つかりませんでした。\nISBNを確認してください。");
             //document.getElementById("property").style.display = "none";
+            alert("書籍が見つかりませんでした。\nISBNを確認してください。");
         }else{ // 書籍が見つかったとき
             title = data.items[0].volumeInfo.title;
             $("#BookTitle").html(data.items[0].volumeInfo.title);
