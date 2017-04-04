@@ -19,17 +19,7 @@ function onButtonJAN(){
 }
 
 function debugtest(){
-    isbn = "9784797377026";
-    const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-    var title = "";
-    $.getJSON(url, function(data) {
-        if(!data.totalItems) {
-            title = "";
-        }else{
-            title = data.items[0].volumeInfo.title;
-            console.log(title);
-        }
-    });
+   document.getElementById("property").style.display="none";
 }
 
 function getUserName(){
@@ -112,6 +102,7 @@ function postToServer(isbn){
     });
 }
 
+
 // バーコードから番号を読み取る
 window.addEventListener('DOMContentLoaded',function(){
     function getParameterByName(name) {
@@ -167,6 +158,17 @@ function getBookTitle(isbn){
             title = data.items[0].volumeInfo.title;
         }
     });
+}
+
+function checkNumber(obj){
+    var num = obj.value;
+    if(num.match(/[^0-9]/g)){
+        alert ("半角数値で入力して下さい");
+        return false;
+    }else{
+        getBookData(num);
+        document.getElementById("property").style.display = "block";
+    }
 }
 
 function memberSet(){
