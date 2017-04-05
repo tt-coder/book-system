@@ -19,8 +19,15 @@ function onButtonJAN(){
 }
 
 function debugtest(){
-    var selectName = document.forms.property.username;
-    console.log(selectName.selectedIndex);
+    var current = getCurrentDir();
+    const url = current + "static/data/test1.json";
+    console.log(url);
+    $.getJSON(url, function(json) {
+        console.log(json);
+        $("#book-list").columns({
+            data:json
+        });
+    });
 }
 
 function getUserName(){
@@ -251,13 +258,16 @@ function registerBook(){
 }
 
 $(document).ready(function() {
-    //var data = "<input type=\"button\" value=\"削除\"></input>";
-    var json = [
-        //{"名前":"山田太郎", "書籍名":"C言語入門", "貸出日":"2017-04-01", "貸出日数":"8"}
-        {"書籍名":"C言語入門", "著者":"山田太郎", "出版社":"XX社", "発行日":"2017-04-01", "冊数":"2"},
-        {"書籍名":"C言語入門", "著者":"山田太郎", "出版社":"XX社", "発行日":"2017-04-01", "冊数":"2"}
-    ];
-    $("#book-list").columns({
-        data:json
+    var current = getCurrentDir();
+    const url = current + "static/data/9784797377026.json";
+    console.log("OK");
+    $.getJSON(url, function(json) {
+        console.log("OK2");
+        console.log(json);
+        //json = "[" + json + "]";
+        console.log(json);
+        $("#book-list").columns({
+            data:json
+        });
     });
 });
