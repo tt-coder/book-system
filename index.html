@@ -46,6 +46,10 @@
 </header>
     <div class="container">
         <div class="row">
+            <div>
+                テスト用ISBN：9784797377026
+                <input type="button" value="Debug" onclick="debugtest()"></input>
+            </div>
             <br>
             <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
             <br>
@@ -54,20 +58,30 @@
                 <input type="text" class="form-control" placeholder="スキャンまたはISBNを入力" aria-describedby="basic-addon1"
                 id="jancode" onblur="checkNumber(this)" ></input>
             </div>
-            <div>
-                テスト用ISBN：9784797377026
-                <input type="button" value="Debug" onclick="debugtest()"></input>
-            </div>
-
-            <!-- 書籍情報表示部 -->
-            <p id="BookTitle"></p>
-            <p id="BookAuthor"></p>
-            <p id="PublishedDate"></p>
-            <p id="Publisher"></p>
-            <p id="BookThumbnail"></p>
 
             <!-- ラジオボタン -->
             <form name="property" id="property" style="display:none" onclick="checkProperty()">
+                <br>
+                <div class="text-center">
+                    <p id="BookThumbnail"></p>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">タイトル</span>
+                    <input type="text" id="BookTitle" class="form-control" placeholder="C言語入門" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">著者名</span>
+                    <input type="text" id="BookAuthor" class="form-control" placeholder="山田太郎" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">出版社</span>
+                    <input type="text" id="Publisher" class="form-control" placeholder="ABC社" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">発行日</span>
+                    <input type="text" id="PublishedDate" class="form-control" placeholder="2017-04-01" aria-describedby="basic-addon1"></input>
+                </div>
+                <br>
                 <p>所属を選択してください</p>
                 <select class="form-control" name="grade" onchange="memberSet()" >
                     <option value = "default">選択</option>
@@ -79,6 +93,7 @@
                     <option value = "B4">B4</option>
                     <option value = "B3">B3</option>
                 </select>
+                <br>
                 <p>名前を選択してください</p>
                 <select class="form-control" name="username">
                 </select>
