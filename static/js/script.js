@@ -76,9 +76,9 @@ function postToServer(isbn){
     var current = getCurrentDir();
     var dialog = "";
     if(nowEvent == "borrow"){
-        dialog = "　を借りてもいいですか？"
+        dialog = "\nを借りてもよろしいですか？"
     }else if (nowEvent == "return"){
-        dialog = "　を返却してもいいですか？"
+        dialog = "\nを返却してもよろしいですか？"
     }
     var result = confirm(title + dialog);
     if(result){
@@ -151,23 +151,7 @@ function checkNumber(obj){
 
 // プルダウンメニューにメンバーをセット
 function memberSet(){
-    var nameStaff = [
-        //"staff_1", "staff_2"
-    ];
-    var nameM0 = [
-        "M0_1", "M0_2", "M0_3", "M0_4"
-    ];
-    
-    var nameB4 = [
-        "B4_1", "B4_2", "B4_3"
-    ];
-
-    var nameB3 = [
-        "B3_1", "B3_2", "B3_3"
-    ];
-
     var memberName = [[]];
-
     var current = getCurrentDir();
     const url = current + "static/data/member.json";
     $.getJSON(url, function(json) {
@@ -190,34 +174,8 @@ function memberSet(){
         switch(selected){
             case 0: selectName.options.length = 0; break;
             default: setIndex(memberName[selected]);
-            /*
-            case 1: setIndex(nameStaff); break;
-            case 2: setIndex(nameM0); break;
-            case 3: setIndex(nameB4); break;
-            case 4: setIndex(nameB3); break;
-            */
         }
     });
-    /*
-    console.log(nameStaff[0]);
-    console.log(nameStaff[1]);
-    var selectGrade = document.forms.property.grade;
-    var selectName = document.forms.property.username;
-    selectName.options.length = 0;
-
-    function setIndex(array){
-        for(var i=0;i<array.length;i++){
-            selectName.options[i] = new Option(array[i]);
-        }
-    }
-    switch(selectGrade.selectedIndex){
-        case 0: selectName.options.length = 0; break;
-        case 1: setIndex(nameStaff); break;
-        case 2: setIndex(nameM0); break;
-        case 3: setIndex(nameB4); break;
-        case 4: setIndex(nameB3); break;
-    }
-    */
 }
 
 // ユーザー名、貸借が選択されているかチェック
