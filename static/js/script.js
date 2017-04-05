@@ -76,13 +76,13 @@ function postToServer(isbn){
         success: function(){
             var result = confirm(title + dialog);
             if(result){
-                window.location.href = current + "borrow-return.html";
+                window.location.href = current + "result.html";
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
             var result = confirm(title + dialog);
             if(result){
-                window.location.href = current + "borrow-return.html";
+                window.location.href = current + "result.html";
             }
         }
     });
@@ -212,16 +212,52 @@ function subValue(){
 }
 
 function registerBook(){
-    var isbn = document.getElementById("jancode").value;
-
+    var nowIsbn = document.getElementById("jancode").value;
+    var nowTitle = document.getElementById("BookTitle").value;
+    var nowAuthor = document.getElementById("BookAuthor").value;
+    var nowPublishedDate = document.getElementById("PublishedDate").value;
+    var nowPublisher = document.getElementById("Publisher").value;
+    var nowBookValue = document.getElementById("booknum").value;
+    var data = {
+            isbn: nowIsbn,
+            title: nowTitle,
+            author: nowAuthor,
+            publisheddate: nowPublishedDate,
+            publisher: nowPublisher,
+            bookvalue: nowBookValue
+    };
+    console.log(JSON.stringify(data));
+    var hostURL = ""; // サーバーのURL
+    var current = getCurrentDir();
+    var dialog = "";
+    $.ajax({
+        url: hostURL,
+        type: "POST",
+        data: JSON.stringify(data),
+        timeout: 10000,
+        success: function(){
+            var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
+            if(result){
+                window.location.href = current + "result.html";
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
+            if(result){
+                window.location.href = current + "result.html";
+            }
+        }
+    });
 }
 
 $(document).ready(function() {
-  var json = [
-    //{"名前":"山田太郎", "書籍名":"C言語入門", "貸出日":"2017-04-01", "貸出日数":"8"}
-    {"書籍名":"C言語入門", "著者":"山田太郎", "出版社":"XX社", "発行日":"2017-04-01", "冊数":"2"}
-  ];
-  $("#book-list").columns({
-    data:json
-  });
+    //var data = "<input type=\"button\" value=\"削除\"></input>";
+    var json = [
+        //{"名前":"山田太郎", "書籍名":"C言語入門", "貸出日":"2017-04-01", "貸出日数":"8"}
+        {"書籍名":"C言語入門", "著者":"山田太郎", "出版社":"XX社", "発行日":"2017-04-01", "冊数":"2"},
+        {"書籍名":"C言語入門", "著者":"山田太郎", "出版社":"XX社", "発行日":"2017-04-01", "冊数":"2"}
+    ];
+    $("#book-list").columns({
+        data:json
+    });
 });
