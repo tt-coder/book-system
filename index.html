@@ -59,29 +59,31 @@
                 id="jancode" onblur="checkNumber(this)" ></input>
             </div>
 
-            <!-- ラジオボタン -->
+            <!-- プロパティ -->
             <form name="property" id="property" style="display:none" onclick="checkProperty()">
                 <br>
+                <!-- 書籍情報 -->
                 <div class="text-center">
                     <p id="BookThumbnail"></p>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">タイトル</span>
-                    <input type="text" id="BookTitle" class="form-control" placeholder="C言語入門" aria-describedby="basic-addon1"></input>
+                    <input type="text" id="BookTitle" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">著者名</span>
-                    <input type="text" id="BookAuthor" class="form-control" placeholder="山田太郎" aria-describedby="basic-addon1"></input>
+                    <input type="text" id="BookAuthor" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">出版社</span>
-                    <input type="text" id="Publisher" class="form-control" placeholder="ABC社" aria-describedby="basic-addon1"></input>
+                    <input type="text" id="Publisher" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">発行日</span>
-                    <input type="text" id="PublishedDate" class="form-control" placeholder="2017-04-01" aria-describedby="basic-addon1"></input>
+                    <input type="text" id="PublishedDate" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
                 </div>
                 <br>
+                <!-- プルダウンメニュー -->
                 <p>所属を選択してください</p>
                 <select class="form-control" name="grade" onchange="memberSet()" >
                     <option value = "default">選択</option>
@@ -98,6 +100,7 @@
                 <select class="form-control" name="username">
                 </select>
                 <br>
+                <!-- ラジオボタン -->
                 <div class="text-center">
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default btn-lg active">

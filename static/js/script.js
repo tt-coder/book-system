@@ -197,7 +197,7 @@ function addValue(){
 // 冊数を引く
 function subValue(){
     var nowValue = document.getElementById("booknum").value;
-    if(nowValue != "0"){
+    if(nowValue != "1"){ // 1未満にならないようにする
         document.getElementById("booknum").value = parseInt(nowValue, 10) - 1;
     }
 }
