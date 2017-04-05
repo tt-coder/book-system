@@ -52,48 +52,42 @@
                 <input type="button" value="Debug" onclick="debugtest()"></input>
             </div>
             <form id="registration">
-                <ul>
-                    <li class="jancode">
-                        <label for="jancode">ISBN</label>
-                        <input type="text" id="jancode" onblur="checkNumber(this)" placeholder="スキャンまたはISBN手打ち" size="23" maxlength="13"></input>
-                        <input type="button" value="スキャン" onclick="scanJAN()"></input>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="title">
-                        <label for="title">タイトル</label>
-                        <input type="text" id="BookTitle" placeholder="C言語入門"></input>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="author">
-                        <label for="author">著者</label>
-                        <input type="text" id="BookAuthor" placeholder="山田太郎"></input>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="publisheddate">
-                        <label for="title">発行日</label>
-                        <input type="text" id="PublishedDate" placeholder="2017-04-01"></input>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="publisher">
-                        <label for="publisher">出版社</label>
-                        <input type="text" id="Publisher" placeholder="XX社"></input>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="bookvalue">
-                        <label for="boolvalue">冊数</label>
-                        <input type="text" id="booknum" value="1" size="2"></input>
-                        <input type="button" value="+" onclick="addValue()"></input>
-                        <input type="button" value="-" onclick="subValue()"></input>
-                    </li>
-                </ul>
-                <ul>
-                    <input type="button" id="register" value="登録" onclick="registerBook()"></input>
-                </ul>
+                <br>
+                <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">ISBN</span>
+                    <input type="text" class="form-control" placeholder="スキャンまたはISBNを入力" aria-describedby="basic-addon1"
+                    id="jancode" onblur="checkNumber(this)" ></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">タイトル</span>
+                    <input type="text" id="BookTitle" class="form-control" placeholder="C言語入門" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">著者名</span>
+                    <input type="text" id="BookAuthor" class="form-control" placeholder="山田太郎" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">出版社</span>
+                    <input type="text" id="Publisher" class="form-control" placeholder="ABC社" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">発行日</span>
+                    <input type="text" id="PublishedDate" class="form-control" placeholder="2017-04-01" aria-describedby="basic-addon1"></input>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">冊数</span>
+                    <input type="text" id="booknum" class="form-control" value="1" aria-describedby="basic-addon1"></input>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" onclick="addValue()">＋</button>
+                        <button class="btn btn-primary" type="button" onclick="subValue()">ー</button>
+                    </span>
+                </div>
+                <br>
+                <div class-"input-group">
+                    <input type="button" class="btn btn-success btn-lg btn-block" value="登録" onclick="registerBook()"></input>
+                </div>
             </form>
             <form id="property">
             </form>

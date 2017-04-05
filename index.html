@@ -46,9 +46,13 @@
 </header>
     <div class="container">
         <div class="row">
-            <div>
-                <input type="text" id="jancode" onblur="checkNumber(this)" placeholder="スキャンまたはISBN手打ち" size="23" maxlength="13"></input>
-                <input type="button" value="スキャン" onclick="scanJAN()"></input>
+            <br>
+            <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">ISBN</span>
+                <input type="text" class="form-control" placeholder="スキャンまたはISBNを入力" aria-describedby="basic-addon1"
+                id="jancode" onblur="checkNumber(this)" ></input>
             </div>
             <div>
                 テスト用ISBN：9784797377026
@@ -64,8 +68,9 @@
 
             <!-- ラジオボタン -->
             <form name="property" id="property" style="display:none" onclick="checkProperty()">
-                <select name="grade" onchange="memberSet()" >
-                    <option value = "default">選択してください</option>
+                <p>所属を選択してください</p>
+                <select class="form-control" name="grade" onchange="memberSet()" >
+                    <option value = "default">選択</option>
                     <option value = "staff">スタッフ</option>
                     <option value = "D">D</option>
                     <option value = "M2">M2</option>
@@ -74,18 +79,22 @@
                     <option value = "B4">B4</option>
                     <option value = "B3">B3</option>
                 </select>
-                <select name="username">
+                <p>名前を選択してください</p>
+                <select class="form-control" name="username">
                 </select>
                 <br>
-                <div class="radio">
-                    <label><input type="radio" name="event" id="radio1" value="borrow"> 貸出 </label>
+                <div class="text-center">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default btn-lg active">
+                            <input type="radio" autocomplete="off" name="event" id="radio1" value="borrow">貸出
+                        </label>
+                        <label class="btn btn-default btn-lg">
+                            <input type="radio" autocomplete="off" name="event" id="radio2" value="return">返却
+                        </label>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="event" id="radio2" value="return"> 返却 </label>
-                </div>
-                <div>
-                    <input type="button" id="runbutton" value="実行" disabled="disabled" onclick="onButtonJAN()"></input>
-                </div>
+                <br>
+                <input type="button" class="btn btn-success btn-lg btn-block" id="runbutton" value="実行" disabled="disabled" onclick="onButtonJAN()"></input>
             </form>
         </div>
     </div>
