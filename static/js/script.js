@@ -152,9 +152,8 @@ function checkNumber(obj){
 // プルダウンメニューにメンバーをセット
 function memberSet(){
     var nameStaff = [
-        "staff_1", "staff_2"
+        //"staff_1", "staff_2"
     ];
-
     var nameM0 = [
         "M0_1", "M0_2", "M0_3", "M0_4"
     ];
@@ -167,6 +166,41 @@ function memberSet(){
         "B3_1", "B3_2", "B3_3"
     ];
 
+    var memberName = [[]];
+
+    var current = getCurrentDir();
+    const url = current + "static/data/member.json";
+    $.getJSON(url, function(json) {
+        for(var i=0;i<7;i++){
+            var tmp = $.map(json[i], function(value, index) {
+                return value;
+            });
+             memberName.push(tmp);
+        }
+        console.log(memberName);
+        var selectGrade = document.forms.property.grade;
+        var selectName = document.forms.property.username;
+        selectName.options.length = 0;
+        function setIndex(array){
+            for(var i=0;i<array.length;i++){
+                selectName.options[i] = new Option(array[i]);
+            }
+        }
+        var selected = selectGrade.selectedIndex;
+        switch(selected){
+            case 0: selectName.options.length = 0; break;
+            default: setIndex(memberName[selected]);
+            /*
+            case 1: setIndex(nameStaff); break;
+            case 2: setIndex(nameM0); break;
+            case 3: setIndex(nameB4); break;
+            case 4: setIndex(nameB3); break;
+            */
+        }
+    });
+    /*
+    console.log(nameStaff[0]);
+    console.log(nameStaff[1]);
     var selectGrade = document.forms.property.grade;
     var selectName = document.forms.property.username;
     selectName.options.length = 0;
@@ -183,6 +217,7 @@ function memberSet(){
         case 3: setIndex(nameB4); break;
         case 4: setIndex(nameB3); break;
     }
+    */
 }
 
 // ユーザー名、貸借が選択されているかチェック
@@ -249,7 +284,7 @@ function registerBook(){
 
 // jsonをテーブルに変換する
 $(document).ready(function() {
-    function getJsonFile(url, tableID){
+    function setJsonFile(url, tableID){
         $.getJSON(url, function(json) {
             $(tableID).columns({
                 data:json
@@ -260,15 +295,15 @@ $(document).ready(function() {
     var current = getCurrentDir();
     if(nowURL.indexOf("borrow-list.html") != -1){
         const url = current + "static/data/borrow-list.json";
-        getJsonFile(url, "#borrow-list");
+        setJsonFile(url, "#borrow-list");
     }
     if(nowURL.indexOf("history.html") != -1){
         const url = current + "static/data/history.json";
-        getJsonFile(url, "#history");
+        setJsonFile(url, "#history");
     }
     if(nowURL.indexOf("book-list.html") != -1){
         const url = current + "static/data/book-list.json";
-        getJsonFile(url, "#book-list");
+        setJsonFile(url, "#book-list");
     }
 });
 
