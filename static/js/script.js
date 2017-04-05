@@ -18,32 +18,27 @@ function onButtonJAN(){
     postToServer(isbn);
 }
 
-function debugtest(){
-    var current = getCurrentDir();
-    const url = current + "static/data/test1.json";
-    console.log(url);
-    $.getJSON(url, function(json) {
-        console.log(json);
-        $("#book-list").columns({
-            data:json
-        });
-    });
-}
+// バーコードから番号を読み取る
+window.addEventListener('DOMContentLoaded',function(){
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    var r = getParameterByName('r')
+    if(r){
+        document.getElementById('jancode').innerHTML = r;
+        document.getElementById("jancode").value = r;
+        getBookData(r);
+    }
+},false);
 
+// 選択されたユーザー名を返す
 function getUserName(){
     var selectName = document.forms.property.username;
     var index = selectName.selectedIndex;
     return selectName.options[index].text;
-}
-
-function getCurrentDir(){
-    function getDir(place, n) {
-        return place.pathname.replace(new RegExp("(?:\\\/+[^\\\/]*){0," + ((n || 0) + 1) + "}$"), "/");
-    }
-    var local = window.location;
-	var url = local.origin;
-    return url + getDir(local); // 現在のディレクトリ
-    //url + getDir(local,1);
 }
 
 // 選択されたラジオボタンの値を読み取る
@@ -55,6 +50,16 @@ function getProperty(){
         }
     }
     return nowEvent;
+}
+
+// 現在のディレクトリを返す
+function getCurrentDir(){
+    function getDir(place, n) {
+        return place.pathname.replace(new RegExp("(?:\\\/+[^\\\/]*){0," + ((n || 0) + 1) + "}$"), "/");
+    }
+    var local = window.location;
+	var url = local.origin;
+    return url + getDir(local); // 現在のディレクトリ
 }
 
 // サーバーにPOST
@@ -92,23 +97,6 @@ function postToServer(isbn){
     }
 }
 
-
-// バーコードから番号を読み取る
-window.addEventListener('DOMContentLoaded',function(){
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    var r = getParameterByName('r')
-    if(r){
-        document.getElementById('jancode').innerHTML = r;
-        document.getElementById("jancode").value = r;
-        getBookData(r);
-    }
-},false);
-
 // データ取得
 function getBookData(isbn){
     const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
@@ -137,6 +125,7 @@ function getBookData(isbn){
     });
 };
 
+// 書籍のタイトルを取得する
 function getBookTitle(isbn){
     const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
     var title = "";
@@ -149,6 +138,7 @@ function getBookTitle(isbn){
     });
 }
 
+// 入力されたISBNをチェックする
 function checkNumber(obj){
     var num = obj.value;
     if(num.match(/[^0-9]/g)){
@@ -159,6 +149,7 @@ function checkNumber(obj){
     }
 }
 
+// プルダウンメニューにメンバーをセット
 function memberSet(){
     var nameStaff = [
         "staff_1", "staff_2"
@@ -194,20 +185,23 @@ function memberSet(){
     }
 }
 
+// ユーザー名、貸借が選択されているかチェック
 function checkProperty(){
     var selectName = document.forms.property.username;
     var index = selectName.selectedIndex;
     var nowEvent = getProperty();
-    if(index != -1 && nowEvent != ""){
+    if(index != -1 && nowEvent != ""){ // 選択されていれば実行ボタンを有効化
         document.getElementById("runbutton").disabled = false;
     }
 }
 
+// 冊数を足す
 function addValue(){
     var nowValue = document.getElementById("booknum").value;
     document.getElementById("booknum").value = parseInt(nowValue, 10) + 1;
 }
 
+// 冊数を引く
 function subValue(){
     var nowValue = document.getElementById("booknum").value;
     if(nowValue != "0"){
@@ -215,6 +209,7 @@ function subValue(){
     }
 }
 
+// 本を登録する
 function registerBook(){
     var nowIsbn = document.getElementById("jancode").value;
     var nowTitle = document.getElementById("BookTitle").value;
@@ -252,17 +247,16 @@ function registerBook(){
     }
 }
 
+// jsonをテーブルに変換する
 $(document).ready(function() {
     var current = getCurrentDir();
-    const url = current + "static/data/datajson.json";
-    console.log("OK");
+    const url = current + "static/data/test.json";
     $.getJSON(url, function(json) {
-        console.log("OK2");
-        console.log(json);
-        //json = "[" + json + "]";
-        console.log(json);
         $("#book-list").columns({
             data:json
         });
     });
 });
+
+function debugtest(){
+}
