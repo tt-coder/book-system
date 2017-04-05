@@ -250,7 +250,7 @@ function registerBook(){
 // jsonをテーブルに変換する
 $(document).ready(function() {
     var current = getCurrentDir();
-    const url = current + "static/data/test.json";
+    const url = current + "static/data/history.json";
     $.getJSON(url, function(json) {
         $("#book-list").columns({
             data:json
