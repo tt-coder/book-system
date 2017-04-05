@@ -249,14 +249,29 @@ function registerBook(){
 
 // jsonをテーブルに変換する
 $(document).ready(function() {
-    var current = getCurrentDir();
-    const url = current + "static/data/history.json";
-    $.getJSON(url, function(json) {
-        $("#book-list").columns({
-            data:json
+    function getJsonFile(url, tableID){
+        $.getJSON(url, function(json) {
+            $(tableID).columns({
+                data:json
+            });
         });
-    });
+    }
+    var nowURL = location.href;
+    var current = getCurrentDir();
+    if(nowURL.indexOf("borrow-list.html") != -1){
+        const url = current + "static/data/borrow-list.json";
+        getJsonFile(url, "#borrow-list");
+    }
+    if(nowURL.indexOf("history.html") != -1){
+        const url = current + "static/data/history.json";
+        getJsonFile(url, "#history");
+    }
+    if(nowURL.indexOf("book-list.html") != -1){
+        const url = current + "static/data/book-list.json";
+        getJsonFile(url, "#book-list");
+    }
 });
 
 function debugtest(){
+
 }

@@ -46,46 +46,7 @@
 </header>
     <div class="container">
         <div class="row">
-            <div>
-                <input type="text" id="jancode" onblur="checkNumber(this)" placeholder="スキャンまたはISBN手打ち" size="23" maxlength="13"></input>
-                <input type="button" value="スキャン" onclick="scanJAN()"></input>
-            </div>
-            <div>
-                テスト用ISBN：9784797377026
-                <input type="button" value="Debug" onclick="debugtest()"></input>
-            </div>
-
-            <!-- 書籍情報表示部 -->
-            <p id="BookTitle"></p>
-            <p id="BookAuthor"></p>
-            <p id="PublishedDate"></p>
-            <p id="Publisher"></p>
-            <p id="BookThumbnail"></p>
-
-            <!-- ラジオボタン -->
-            <form name="property" id="property" style="display:none" onclick="checkProperty()">
-                <select name="grade" onchange="memberSet()" >
-                    <option value = "default">選択してください</option>
-                    <option value = "staff">スタッフ</option>
-                    <!-- <option value = "M2">M2</option> -->
-                    <!-- <option value = "M1">M1</option> -->
-                    <option value = "M0">M0</option>
-                    <option value = "B4">B4</option>
-                    <option value = "B3">B3</option>
-                </select>
-                <select name="username">
-                </select>
-                <br>
-                <div class="radio">
-                    <label><input type="radio" name="event" id="radio1" value="borrow"> 貸出 </label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="event" id="radio2" value="return"> 返却 </label>
-                </div>
-                <div>
-                    <input type="button" id="runbutton" value="実行" disabled="disabled" onclick="onButtonJAN()"></input>
-                </div>
-            </form>
+            <div id="history"></div>
         </div>
     </div>
 </body>
