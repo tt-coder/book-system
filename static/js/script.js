@@ -75,24 +75,21 @@ function postToServer(isbn){
     }else if (nowEvent == "return"){
         dialog = "　を返却してもいいですか？"
     }
-    $.ajax({
-        url: hostURL,
-        type: "POST",
-        data: JSON.stringify(data),
-        timeout: 10000,
-        success: function(){
-            var result = confirm(title + dialog);
-            if(result){
+    var result = confirm(title + dialog);
+    if(result){
+        $.ajax({
+            url: hostURL,
+            type: "POST",
+            data: JSON.stringify(data),
+            timeout: 10000,
+            success: function(){
+                window.location.href = current + "result.html";
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
                 window.location.href = current + "result.html";
             }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
-            var result = confirm(title + dialog);
-            if(result){
-                window.location.href = current + "result.html";
-            }
-        }
-    });
+        });
+    }
 }
 
 
@@ -233,33 +230,31 @@ function registerBook(){
             publisher: nowPublisher,
             bookvalue: nowBookValue
     };
+
     console.log(JSON.stringify(data));
     var hostURL = ""; // サーバーのURL
     var current = getCurrentDir();
     var dialog = "";
-    $.ajax({
-        url: hostURL,
-        type: "POST",
-        data: JSON.stringify(data),
-        timeout: 10000,
-        success: function(){
-            var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
-            if(result){
+    var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
+    if(result){
+        $.ajax({
+            url: hostURL,
+            type: "POST",
+            data: JSON.stringify(data),
+            timeout: 10000,
+            success: function(){
+                window.location.href = current + "result.html";
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
                 window.location.href = current + "result.html";
             }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
-            var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
-            if(result){
-                window.location.href = current + "result.html";
-            }
-        }
-    });
+        });
+    }
 }
 
 $(document).ready(function() {
     var current = getCurrentDir();
-    const url = current + "static/data/9784797377026.json";
+    const url = current + "static/data/datajson.json";
     console.log("OK");
     $.getJSON(url, function(json) {
         console.log("OK2");
