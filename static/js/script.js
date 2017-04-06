@@ -106,12 +106,13 @@ function getBookData(isbn){
         type: "GET",
         dataType: "xml",
         timeout: 10000,
-        //xhrFields: {withCredentials: true},
         error:function(errorThrown) {
-            //alert("エラー");
+            alert("エラー");
         },
         success:function(xml){
-            var item = $(xml).find("item");
+            var xmlText = xml.responseText;
+            var xmlDoc = $.parseXML(xmlText);
+            var item = $(xmlDoc).find("item");
             var newItem = item[item.length-1];
             title = $(newItem).find("dc\\:title").text();
             var author = $(newItem).find("dc\\:creator").text().replace("著","").replace("監修","");
