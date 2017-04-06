@@ -129,6 +129,7 @@ function getBookData(isbn){
                 return String(num);
             }
             var newPubDate = year + "-" + checkDate(month) + "-" + checkDate(newDate);
+            console.log(title + author + newPubDate + publisher);
             $("#BookTitle").html(title);
             $("#BookTitle").val(title);
             $("#BookAuthor").html(author);
