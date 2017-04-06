@@ -248,6 +248,7 @@ function registerBook(){
             type: "POST",
             data: JSON.stringify(data),
             timeout: 10000,
+            xhrFields: {withCredentials: true},
             success: function(){
                 window.location.href = current + "result.html";
             },
@@ -284,6 +285,7 @@ $(document).ready(function() {
 });
 
 function debugtest(){
+    /*
     var isbn = "9784797377026";
     var hostURL = "http://iss.ndl.go.jp/api/opensearch?isbn=" + isbn;
     var xmlHttp;
@@ -295,4 +297,5 @@ function debugtest(){
     var newItem = item[item.length-1];
     title = $(newItem).find("dc\\:title").text();
     console.log(title);
+    */
 }
