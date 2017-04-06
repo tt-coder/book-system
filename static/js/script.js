@@ -106,7 +106,7 @@ function getBookData(isbn){
         type: "GET",
         dataType: "xml",
         timeout: 10000,
-        xhrFields: {withCredentials: true},
+        //xhrFields: {withCredentials: true},
         error:function(errorThrown) {
             //alert("エラー");
         },
