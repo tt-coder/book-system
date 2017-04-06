@@ -107,7 +107,7 @@ function getBookData(isbn){
         dataType: "xml",
         timeout: 10000,
         error:function(errorThrown) {
-            alert("errorThrown");
+            alert(errorThrown);
         },
         success:function(xml){
             var item = $(xml).find("item");
