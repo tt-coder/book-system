@@ -114,9 +114,9 @@ function getBookData(isbn){
             var xmlDoc = $.parseXML(xmlText);
             var item = $(xmlDoc).find("item");
             var newItem = item[item.length-1];
-            title = $(newItem).find("dc\\:title").text();
-            var author = $(newItem).find("dc\\:creator").text().replace("著","").replace("監修","");
-            var publisher = $(newItem).find("dc\\:publisher").text();
+            title = $(newItem).find("title").text();
+            var author = $(newItem).find("creator, dc\\:creator").text().replace("著","").replace("監修","");
+            var publisher = $(newItem).find("publisher, dc\\:publisher").text();
             var pubDate = $(newItem).find("pubDate").text();
             var date = new Date(pubDate);
             var year = String(date.getFullYear());
