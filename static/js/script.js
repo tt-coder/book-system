@@ -312,6 +312,7 @@ function debugtest(){
                 return String(num);
             }
             var newPubDate = year + "-" + checkDate(month) + "-" + checkDate(newDate);
+            /*
             $("#BookTitle").html(title);
             $("#BookTitle").val(title);
             $("#BookAuthor").html(author);
@@ -320,6 +321,7 @@ function debugtest(){
             $("#PublishedDate").val(newPubDate);
             $("#Publisher").html(publisher);
             $("#Publisher").val(publisher);
+            */
             //$("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
             document.getElementById("property").style.display = "block";
         }
