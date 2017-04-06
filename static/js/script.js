@@ -115,6 +115,12 @@ function getBookData(isbn){
             var item = $(xmlDoc).find("item");
             var newItem = item[item.length-1];
             title = $(newItem).find("title").text();
+            var titleMid = title.length/2;
+            var titleRight = title.slice(0,titleMid);
+            var titleLeft = title.slice(titleMid);
+            if(titleRight == titleLeft){
+                title = titleRight;
+            }
             var author = $(newItem).find("creator, dc\\:creator").text().replace("著","").replace("監修","");
             var publisher = $(newItem).find("publisher, dc\\:publisher").text();
             var pubDate = $(newItem).find("pubDate").text();
