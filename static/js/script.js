@@ -106,6 +106,7 @@ function getBookData(isbn){
         type: "GET",
         dataType: "xml",
         timeout: 10000,
+        xhrFields: {withCredentials: true},
         error:function(errorThrown) {
             //alert("エラー");
         },
@@ -248,7 +249,6 @@ function registerBook(){
             type: "POST",
             data: JSON.stringify(data),
             timeout: 10000,
-            xhrFields: {withCredentials: true},
             success: function(){
                 window.location.href = current + "result.html";
             },
