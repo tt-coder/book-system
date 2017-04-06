@@ -106,6 +106,10 @@ function getBookData(isbn){
         type: "GET",
         dataType: "xml",
         timeout: 10000,
+        beforeSend : function( xhr ){
+            if (window.navigator.userAgent.toLowerCase().indexOf('safari') != -1)
+                xhr.setRequestHeader("If-Modified-Since", new Date().toUTCString());
+        },
         error:function(errorThrown) {
             alert(errorThrown);
         },
