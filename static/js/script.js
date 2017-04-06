@@ -284,4 +284,44 @@ $(document).ready(function() {
 });
 
 function debugtest(){
+    var isbn = "9784797377026";
+    var hostURL = "http://iss.ndl.go.jp/api/opensearch?isbn=" + isbn;
+    $.ajax({
+        url: hostURL,
+        type: "GET",
+        dataType: "xml",
+        timeout: 10000,
+        error:function(errorThrown) {
+            //alert("エラー");
+        },
+        success:function(xml){
+            var item = $(xml).find("item");
+            var newItem = item[item.length-1];
+            title = $(newItem).find("dc\\:title").text();
+            var author = $(newItem).find("dc\\:creator").text().replace("著","").replace("監修","");
+            var publisher = $(newItem).find("dc\\:publisher").text();
+            var pubDate = $(newItem).find("pubDate").text();
+            var date = new Date(pubDate);
+            var year = String(date.getFullYear());
+            var month = date.getMonth() + 1;
+            var newDate = date.getDate();
+            function checkDate(num){
+                if(num < 10){
+                    return "0" + String(num);
+                }
+                return String(num);
+            }
+            var newPubDate = year + "-" + checkDate(month) + "-" + checkDate(newDate);
+            $("#BookTitle").html(title);
+            $("#BookTitle").val(title);
+            $("#BookAuthor").html(author);
+            $("#BookAuthor").val(author);
+            $("#PublishedDate").html(newPubDate);
+            $("#PublishedDate").val(newPubDate);
+            $("#Publisher").html(publisher);
+            $("#Publisher").val(publisher);
+            //$("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
+            document.getElementById("property").style.display = "block";
+        }
+    });
 }
