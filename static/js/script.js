@@ -99,27 +99,41 @@ function postToServer(isbn){
 
 // データ取得
 function getBookData(isbn){
-    const url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-    $.getJSON(url, function(data) {
-        if(!data.totalItems) { // 書籍が見つからないとき
-            $("#BookTitle").text("");
-            $("#BookAuthor").text("");
-            $("#PublishedDate").text("");
-            $("#BookThumbnail").text("");
-            $("#Publisher").text("");
-            document.getElementById("property").style.display = "none";
-            alert("書籍が見つかりませんでした。\nISBNを確認するか、書籍情報を入力してください。");
-        }else{ // 書籍が見つかったとき
-            title = data.items[0].volumeInfo.title;
-            $("#BookTitle").html(data.items[0].volumeInfo.title);
-            $("#BookTitle").val(data.items[0].volumeInfo.title);
-            $("#BookAuthor").html(data.items[0].volumeInfo.authors[0]);
-            $("#BookAuthor").val(data.items[0].volumeInfo.authors[0]);
-            $("#PublishedDate").html(data.items[0].volumeInfo.publishedDate);
-            $("#PublishedDate").val(data.items[0].volumeInfo.publishedDate);
-            $("#Publisher").html(data.items[0].volumeInfo.publisher);
-            $("#Publisher").val(data.items[0].volumeInfo.publisher);
-            $("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
+    var hostURL = "http://iss.ndl.go.jp/api/opensearch?isbn=" + isbn;
+    $.ajax({
+        url: hostURL,
+        type: "GET",
+        dataType: "xml",
+        timeout: 10000,
+        error:function() {
+        },
+        success:function(xml){
+            var item = $(xml).find("item");
+            var newItem = item[item.length-1];
+            title = $(newItem).find("dc\\:title").text();
+            var author = $(newItem).find("dc\\:creator").text().replace("著","").replace("監修","");
+            var publisher = $(newItem).find("dc\\:publisher").text();
+            var pubDate = $(newItem).find("pubDate").text();
+            var date = new Date(pubDate);
+            var year = String(date.getFullYear());
+            var month = date.getMonth() + 1;
+            var newDate = date.getDate();
+            function checkDate(num){
+                if(num < 10){
+                    return "0" + String(num);
+                }
+                return String(num);
+            }
+            var newPubDate = year + "-" + checkDate(month) + "-" + checkDate(newDate);
+            $("#BookTitle").html(title);
+            $("#BookTitle").val(title);
+            $("#BookAuthor").html(author);
+            $("#BookAuthor").val(author);
+            $("#PublishedDate").html(newPubDate);
+            $("#PublishedDate").val(newPubDate);
+            $("#Publisher").html(publisher);
+            $("#Publisher").val(publisher);
+            //$("#BookThumbnail").html('<img src=\"' + data.items[0].volumeInfo.imageLinks.smallThumbnail + '\" />');
             document.getElementById("property").style.display = "block";
         }
     });
@@ -145,7 +159,9 @@ function checkNumber(obj){
         alert ("半角数値で入力して下さい");
         return false;
     }else{
-        getBookData(num);
+        if(num != ""){
+            getBookData(num);
+        }
     }
 }
 
@@ -266,5 +282,4 @@ $(document).ready(function() {
 });
 
 function debugtest(){
-
 }
