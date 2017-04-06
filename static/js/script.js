@@ -312,6 +312,7 @@ function debugtest(){
                 return String(num);
             }
             var newPubDate = year + "-" + checkDate(month) + "-" + checkDate(newDate);
+            console.log(title);
             /*
             $("#BookTitle").html(title);
             $("#BookTitle").val(title);
