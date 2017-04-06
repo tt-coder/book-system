@@ -250,7 +250,11 @@ function registerBook(){
     var hostURL = ""; // サーバーのURL
     var current = getCurrentDir();
     var dialog = "";
-    var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
+    if(nowIsbn == "" || nowTitle == "" || nowAuthor == "" || nowPublishedDate == "" || nowPublisher == ""){
+        alert("入力されていない項目があります。");
+    }else{
+        var result = confirm(nowTitle + "\n" + nowAuthor + "\n" + "を登録してもよろしいですか？");
+    }
     if(result){
         $.ajax({
             url: hostURL,
@@ -271,6 +275,7 @@ function registerBook(){
 $(document).ready(function() {
     function setJsonFile(url, tableID){
         $.getJSON(url, function(json) {
+            console.log(json);
             $(tableID).columns({
                 data:json
             });
