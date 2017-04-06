@@ -99,6 +99,7 @@ function postToServer(isbn){
 
 // データ取得
 function getBookData(isbn){
+    // 国会図書館からXML形式でデータを受け取る
     var hostURL = "http://iss.ndl.go.jp/api/opensearch?isbn=" + isbn;
     $.ajax({
         url: hostURL,
@@ -106,6 +107,7 @@ function getBookData(isbn){
         dataType: "xml",
         timeout: 10000,
         error:function() {
+            alert("IJ");
         },
         success:function(xml){
             var item = $(xml).find("item");
