@@ -287,9 +287,9 @@ $(document).ready(function() {
             cache: false,
             rowStyle: "checkOver",
             columns: [
-                {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"},
-                {field: "タイトル", title: "タイトル", sortable: "true", width: "400px"},
-                {field: "出版社", title: "出版社", sortable: "true", width: "200px"},
+                {field: "貸出先", title: "貸出先", sortable: "true"},
+                {field: "タイトル", title: "タイトル", sortable: "true"},
+                {field: "出版社", title: "出版社", sortable: "true"},
                 {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
                 {field: "貸出日", title: "貸出日", sortable: "true", width:"110px"},
                 {field: "貸出日数", title: "貸出日数", sortable: "true", width:"100px"}
@@ -302,7 +302,7 @@ $(document).ready(function() {
             url: hostURL,
             cache: false,
             columns: [
-                {field: "貸出履歴", title: "貸出履歴", }
+                {field: "貸出履歴", title: "貸出履歴"}
             ]
         });
     }
@@ -312,9 +312,9 @@ $(document).ready(function() {
             url: hostURL,
             cache: false,
             columns: [
-                {field: "タイトル", title: "タイトル", sortable: "true", width: "400px"},
-                {field: "著者名", title: "著者名", sortable: "true", width: "200px"},
-                {field: "出版社", title: "出版社", sortable: "true", width: "200px"},
+                {field: "タイトル", title: "タイトル", sortable: "true"},
+                {field: "著者名", title: "著者名", sortable: "true"},
+                {field: "出版社", title: "出版社", sortable: "true"},
                 {field: "出版日", title: "出版日", sortable: "true", width:"110px"},
                 {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
                 {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"}
