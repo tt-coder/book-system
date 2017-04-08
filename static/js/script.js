@@ -277,29 +277,60 @@ function registerBook(){
 // jsonをテーブルに変換する
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
-    function setJsonFile(url, tableID){
-        $.getJSON(url, function(json) {
-            console.log(json);
-            $(tableID).columns({
-                data:json
-            });
-        });
-    }
     var nowURL = location.href;
     var current = getCurrentDir();
+    const hostURL = current + "static/data/book-list.json";
     if(nowURL.indexOf("borrow-list.html") != -1){
-        const url = current + "static/data/borrow-list.json";
-        setJsonFile(url, "#borrow-list");
+        const hostURL = current + "static/data/borrow-list.json";
+        $("#borrow-list").bootstrapTable({
+            url: hostURL,
+            cache: false,
+            rowStyle: "checkOver",
+            columns: [
+                {field: "貸出先", title: "貸出先", sortable: "true", align:"center"},
+                {field: "タイトル", title: "タイトル", sortable: "true", halign:"center"},
+                {field: "出版社", title: "出版社", sortable: "true", halign:"center"},
+                {field: "ISBN", title: "ISBN", sortable: "true", align:"center"},
+                {field: "貸出日", title: "貸出日", sortable: "true", align:"center"},
+                {field: "貸出日数", title: "貸出日数", sortable: "true", align:"center"}
+            ]
+        });
     }
     if(nowURL.indexOf("history.html") != -1){
-        const url = current + "static/data/history.json";
-        setJsonFile(url, "#history");
+        const hostURL = current + "static/data/history.json";
+        $("#history").bootstrapTable({
+            url: hostURL,
+            cache: false,
+            columns: [
+                {field: "貸出履歴", title: "貸出履歴", },
+            ]
+        });
     }
     if(nowURL.indexOf("book-list.html") != -1){
-        const url = current + "static/data/book-list.json";
-        setJsonFile(url, "#book-list");
+        const hostURL = current + "static/data/book-list.json";
+        $("#book-list").bootstrapTable({
+            url: hostURL,
+            cache: false,
+            columns: [
+                {field: "タイトル", title: "タイトル", sortable: "true", halign:"center"},
+                {field: "著者名", title: "著者名", sortable: "true", halign:"center"},
+                {field: "出版社", title: "出版社", sortable: "true", halign:"center"},
+                {field: "出版日", title: "出版日", sortable: "true", align:"center"},
+                {field: "ISBN", title: "ISBN", sortable: "true", align:"center"},
+                {field: "貸出先", title: "貸出先", sortable: "true", align:"center"},
+            ]
+        });
     }
 });
+
+function checkOver(row, index){
+    var num = parseInt(row.貸出日数,10);
+    if(num >= 14){
+        return {classes: "warning"};
+    }else{
+        return {};
+    }
+}
 
 function debugtest(){
     var current = getCurrentDir();
