@@ -213,7 +213,7 @@ function checkProperty(){
     var selectName = document.forms.property.username;
     var index = selectName.selectedIndex;
     var nowEvent = getProperty();
-    if(index != -1 && nowEvent != ""){ // 選択されていれば実行ボタンを有効化
+    if(index != -1 && index != 0 && nowEvent != ""){ // 選択されていれば実行ボタンを有効化
         document.getElementById("runbutton").disabled = false;
     }
 }
