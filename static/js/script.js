@@ -135,6 +135,9 @@ function getBookData(isbn){
                 return String(num);
             }
             var newPubDate = year + "-" + checkDate(month) + "-" + checkDate(newDate);
+            if(isNaN(year)){
+                newPubDate = "";
+            }
             console.log(title + author + newPubDate + publisher);
             $("#BookTitle").html(title);
             $("#BookTitle").val(title);
@@ -299,17 +302,24 @@ $(document).ready(function() {
 });
 
 function debugtest(){
-    /*
-    var isbn = "9784797377026";
-    var hostURL = "http://iss.ndl.go.jp/api/opensearch?isbn=" + isbn;
-    var xmlHttp;
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", hostURL, false);
-    xmlHttp.send(null);
-    var xml = $(xmlHttp.responseXML);
-    var item = $(xml).find("item");
-    var newItem = item[item.length-1];
-    title = $(newItem).find("dc\\:title").text();
-    console.log(title);
-    */
+    var current = getCurrentDir();
+    var newJson = [];
+    const url = current + "static/data/book-list.json"
+    $.ajaxSetup({ cache: false });
+    $.getJSON(url, function(json) {
+        //console.log(json.length);
+        /*
+        for(var i=0;i<json.length;i++){
+            var tmp = {};
+            tmp["タイトル"] = json[i]["タイトル"];
+            tmp["著者名"] = json[i]["著者名"];
+            tmp["出版社"] = json[i]["出版社"];
+            tmp["出版日"] = json[i]["出版日"];
+            tmp["ISBN"] = json[i]["ISBN"];
+            tmp["貸出先"] = json[i]["貸出先"];
+            newJson.push(tmp);
+            console.log(newJson);
+        }
+        */
+    });
 }
