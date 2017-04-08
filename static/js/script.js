@@ -81,7 +81,7 @@ function postToServer(isbn){
         dialog = "\nを返却してもよろしいですか？"
     }
     var result = confirm(title + dialog);
-    if(result){
+    if(result && nowUserName != "選択"){
         $.ajax({
             url: hostURL,
             type: "POST",
@@ -94,6 +94,8 @@ function postToServer(isbn){
                 window.location.href = current + "result.html";
             }
         });
+    }else{
+        alert("エラー：項目を確認してください");
     }
 }
 
