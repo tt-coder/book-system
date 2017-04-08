@@ -287,12 +287,12 @@ $(document).ready(function() {
             cache: false,
             rowStyle: "checkOver",
             columns: [
-                {field: "貸出先", title: "貸出先", sortable: "true", align:"center"},
-                {field: "タイトル", title: "タイトル", sortable: "true", halign:"center"},
-                {field: "出版社", title: "出版社", sortable: "true", halign:"center"},
-                {field: "ISBN", title: "ISBN", sortable: "true", align:"center"},
-                {field: "貸出日", title: "貸出日", sortable: "true", align:"center"},
-                {field: "貸出日数", title: "貸出日数", sortable: "true", align:"center"}
+                {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"},
+                {field: "タイトル", title: "タイトル", sortable: "true", width: "400px"},
+                {field: "出版社", title: "出版社", sortable: "true", width: "200px"},
+                {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
+                {field: "貸出日", title: "貸出日", sortable: "true", width:"110px"},
+                {field: "貸出日数", title: "貸出日数", sortable: "true", width:"100px"}
             ]
         });
     }
@@ -302,7 +302,7 @@ $(document).ready(function() {
             url: hostURL,
             cache: false,
             columns: [
-                {field: "貸出履歴", title: "貸出履歴", },
+                {field: "貸出履歴", title: "貸出履歴", }
             ]
         });
     }
@@ -312,12 +312,12 @@ $(document).ready(function() {
             url: hostURL,
             cache: false,
             columns: [
-                {field: "タイトル", title: "タイトル", sortable: "true", halign:"center"},
-                {field: "著者名", title: "著者名", sortable: "true", halign:"center"},
-                {field: "出版社", title: "出版社", sortable: "true", halign:"center"},
-                {field: "出版日", title: "出版日", sortable: "true", align:"center"},
-                {field: "ISBN", title: "ISBN", sortable: "true", align:"center"},
-                {field: "貸出先", title: "貸出先", sortable: "true", align:"center"},
+                {field: "タイトル", title: "タイトル", sortable: "true", width: "400px"},
+                {field: "著者名", title: "著者名", sortable: "true", width: "200px"},
+                {field: "出版社", title: "出版社", sortable: "true", width: "200px"},
+                {field: "出版日", title: "出版日", sortable: "true", width:"110px"},
+                {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
+                {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"}
             ]
         });
     }
@@ -333,24 +333,4 @@ function checkOver(row, index){
 }
 
 function debugtest(){
-    var current = getCurrentDir();
-    var newJson = [];
-    const url = current + "static/data/book-list.json"
-    $.ajaxSetup({ cache: false });
-    $.getJSON(url, function(json) {
-        //console.log(json.length);
-        /*
-        for(var i=0;i<json.length;i++){
-            var tmp = {};
-            tmp["タイトル"] = json[i]["タイトル"];
-            tmp["著者名"] = json[i]["著者名"];
-            tmp["出版社"] = json[i]["出版社"];
-            tmp["出版日"] = json[i]["出版日"];
-            tmp["ISBN"] = json[i]["ISBN"];
-            tmp["貸出先"] = json[i]["貸出先"];
-            newJson.push(tmp);
-            console.log(newJson);
-        }
-        */
-    });
 }
