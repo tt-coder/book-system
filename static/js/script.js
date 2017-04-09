@@ -172,7 +172,7 @@ function getBookDataJson(isbn){
             var author = newJson[0]["著者名"];
             var pubDate = newJson[0]["出版日"];
             var publisher = newJson[0]["出版社"];
-            var bookvalue = newJson[0]["蔵書数"];
+            var bookvalue = newJson[0]["冊数"];
             $("#BookTitle").html(title);
             $("#BookTitle").val(title);
             $("#BookAuthor").html(author);
@@ -344,7 +344,7 @@ $(document).ready(function() {
                 {field: "出版社", title: "出版社", sortable: "true"},
                 {field: "出版日", title: "出版日", sortable: "true", width:"110px"},
                 {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
-                {field: "蔵書数", title: "蔵書数", sortable: "true", width:"110px"},
+                {field: "冊数", title: "冊数", sortable: "true", width:"110px"},
                 {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"}
             ]
         });
