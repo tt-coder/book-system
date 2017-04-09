@@ -48,72 +48,77 @@
 </header>
     <div class="container">
         <div class="row">
-            <div>
-                テスト用ISBN：9784797377026
-                <input type="button" value="Debug" onclick="debugtest()"></input>
-            </div>
-            <br>
-            <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
-            <br>
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">ISBN</span>
-                <input type="text" class="form-control" placeholder="スキャンまたはISBNを入力" aria-describedby="basic-addon1"
-                id="jancode" onblur="checkNumber(this)" ></input>
-            </div>
+            <div class="col-xs-12 col-xs-offset-0 bs-component">
+                <div>
+                    テスト用ISBN：9784797377026
+                    <input type="button" value="Debug" onclick="debugtest()"></input>
+                </div>
+                <div>
+                    蔵書の削除
+                </div>
+                <br>
+                <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">ISBN</span>
+                    <input type="text" class="form-control" placeholder="スキャンまたはISBNを入力" aria-describedby="basic-addon1"
+                    id="jancode" onblur="checkNumber(this)" ></input>
+                </div>
 
-            <!-- プロパティ -->
-            <form name="property" id="property" style="display:none">
-                <br>
-                <!-- 書籍情報 -->
-                <div class="text-center">
-                    <p id="BookThumbnail"></p>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">タイトル</span>
-                    <input type="text" id="BookTitle" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">著者名</span>
-                    <input type="text" id="BookAuthor" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">出版社</span>
-                    <input type="text" id="Publisher" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">発行日</span>
-                    <input type="text" id="PublishedDate" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">現在の冊数</span>
-                    <input type="text" id="BookValue" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
-                </div>
-                <br>
-                <!-- ラジオボタン -->
-                <div class="text-center">
-                    <div class="radio" onclick="checkDelete()">
-                        <label>
-                        <input type="radio" name="event" id="radio1" value="alldelete">全て削除する
-                        </label>
-                        　　
-                        <label>
-                        <input type="radio" name="event" id="radio2" value="delete">冊数を指定して削除する
-                        </label>
+                <!-- プロパティ -->
+                <form name="property" id="property" style="display:none">
+                    <br>
+                    <!-- 書籍情報 -->
+                    <div class="text-center">
+                        <p id="BookThumbnail"></p>
                     </div>
-                    <div id="specify" style="display:none">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">削除する冊数</span>
-                            <input type="text" id="booknum" class="form-control" disabled="disabled" value="1" aria-describedby="basic-addon1"></input>
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" onclick="addValue()">＋</button>
-                                <button class="btn btn-primary" type="button" onclick="subValue()">ー</button>
-                            </span>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">タイトル</span>
+                        <input type="text" id="BookTitle" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">著者名</span>
+                        <input type="text" id="BookAuthor" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">出版社</span>
+                        <input type="text" id="Publisher" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">発行日</span>
+                        <input type="text" id="PublishedDate" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">現在の冊数</span>
+                        <input type="text" id="BookValue" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
+                    </div>
+                    <br>
+                    <!-- ラジオボタン -->
+                    <div class="text-center">
+                        <div class="radio" onclick="checkDelete()">
+                            <label>
+                                <input type="radio" name="event" id="radio1" value="alldelete">全て削除する
+                            </label>
+                            　　
+                            <label>
+                                <input type="radio" name="event" id="radio2" value="delete">冊数を指定して削除する
+                            </label>
+                        </div>
+                        <div id="specify" style="display:none">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">削除する冊数</span>
+                                <input type="text" id="booknum" class="form-control" disabled="disabled" value="1" aria-describedby="basic-addon1"></input>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" onclick="addValue()">＋</button>
+                                    <button class="btn btn-primary" type="button" onclick="subValue()">ー</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <input type="button" class="btn btn-success btn-lg btn-block" id="runbutton" value="実行" onclick="deleteBook()"></input>
-            </form>
+                    <br>
+                    <input type="button" class="btn btn-success btn-lg btn-block" id="runbutton" value="実行" onclick="deleteBook()"></input>
+                </form>
+            </div>
         </div>
     </div>
 </body>
