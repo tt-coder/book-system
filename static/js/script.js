@@ -168,11 +168,11 @@ function getBookDataJson(isbn){
             }
         });
         if(newJson.length != 0){
-            console.log(newJson[0]["ISBN"]);
             var title = newJson[0]["タイトル"];
             var author = newJson[0]["著者名"];
             var pubDate = newJson[0]["出版日"];
             var publisher = newJson[0]["出版社"];
+            var bookvalue = newJson[0]["蔵書数"];
             $("#BookTitle").html(title);
             $("#BookTitle").val(title);
             $("#BookAuthor").html(author);
@@ -181,6 +181,8 @@ function getBookDataJson(isbn){
             $("#PublishedDate").val(pubDate);
             $("#Publisher").html(publisher);
             $("#Publisher").val(publisher);
+            $("#BookValue").html(bookvalue);
+            $("#BookValue").val(bookvalue);
             document.getElementById("property").style.display = "block";
         }
     });
@@ -342,6 +344,7 @@ $(document).ready(function() {
                 {field: "出版社", title: "出版社", sortable: "true"},
                 {field: "出版日", title: "出版日", sortable: "true", width:"110px"},
                 {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
+                {field: "蔵書数", title: "蔵書数", sortable: "true", width:"110px"},
                 {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"}
             ]
         });
@@ -355,6 +358,60 @@ function checkOver(row, index){
         return {classes: "warning"};
     }else{
         return {};
+    }
+}
+
+function checkDelete(){
+    var nowEvent = getProperty();
+    if(nowEvent == "alldelete"){
+        document.getElementById("specify").style.display = "none";
+    }else if(nowEvent == "delete"){
+        document.getElementById("specify").style.display = "block";
+    }
+}
+
+function deleteBook(){
+    var nowEvent = getProperty();
+    var bookMaxValue = document.getElementById("BookValue").value;
+    var sendValue = bookMaxValue;
+    var checkValue = false;
+    if(nowEvent == "delete"){
+        var selectedValue = document.getElementById("booknum").value;
+        if(parseInt(selectedValue,10) > parseInt(bookMaxValue,10)){
+            alert("正しい冊数を入力してください");
+        }else{
+            sendValue = selectedValue;
+            checkValue = true;
+        }
+    }else{
+        checkValue = true;
+    }
+    if(checkValue){
+        var isbn = document.getElementById("jancode").value;
+        var title = document.getElementById("BookTitle").value;
+        var data = {
+            isbn: isbn,
+            event: nowEvent,
+            bookvalue: sendValue
+        };
+        console.log(JSON.stringify(data));
+        var hostURL = "";
+        var current = getCurrentDir();
+        var result = confirm(title + "\nを" + " " + sendValue + " 冊削除します。" + "\nよろしいですか？");
+        if(result){
+            $.ajax({
+                url: hostURL,
+                type: "POST",
+                data: JSON.stringify(data),
+                timeout: 10000,
+                success: function(){
+                    window.location.href = current + "result.html";
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    window.location.href = current + "result.html";
+                }
+            });
+        }
     }
 }
 
