@@ -361,6 +361,7 @@ function checkOver(row, index){
     }
 }
 
+// 全削除か冊数を指定して削除かを検知
 function checkDelete(){
     var nowEvent = getProperty();
     if(nowEvent == "alldelete"){
