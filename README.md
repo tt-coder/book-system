@@ -158,6 +158,22 @@ history.json
 ]
 ```
 
+## Tornadoから受け取る文字列
+
+### result.html
+
+{{linkbutton}}
+
+```
+貸出・返却時
+<a href="borrow-return.html" class="btn btn-success btn-lg">貸出・返却へ</a>
+登録時
+<a href="registration.html" class="btn btn-success btn-lg">続けて登録する</a>
+削除時
+<a href="book-delete.html" class="btn btn-success btn-lg">続けて削除する</a>
+```
+
+
 ## Chromeでのデバッグコマンド(Mac)
 
 デフォルトだとローカルの.jsonを取ってこれない  
