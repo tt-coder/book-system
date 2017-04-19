@@ -301,8 +301,9 @@ function registerBook(){
 // Jsonをテーブルに変換する
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
-    var jsonFile = getJsonFromHtml();
+    var nowURL = location.href;
     if(nowURL.indexOf("borrow-list.html") != -1){
+        var jsonFile = getJsonFromHtml();
         $("#borrow-list").bootstrapTable({
             data: jsonFile,
             cache: false,
@@ -318,6 +319,7 @@ $(document).ready(function() {
         });
     }
     if(nowURL.indexOf("history.html") != -1){
+        var jsonFile = getJsonFromHtml();
         $("#history").bootstrapTable({
             data: jsonFile,
             cache: false,
@@ -330,6 +332,7 @@ $(document).ready(function() {
         });
     }
     if(nowURL.indexOf("book-list.html") != -1){
+        var jsonFile = getJsonFromHtml();
         $("#book-list").bootstrapTable({
             data: jsonFile,
             cache: false,
