@@ -156,36 +156,33 @@ function getBookData(isbn){
 
 // JSONから書籍情報を取得する(貸出・返却、削除で使用)
 function getBookDataJson(isbn){
-    var current = getCurrentDir();
-    const url = current + "static/data/book-list.json";
-    $.getJSON(url, function(json) {
-        var newJson = json.filter(function(item, index){
-            if(item.ISBN == isbn){
-                return true;
-            }else{
-                alert("該当する書籍が見つかりません");
-                return false;
-            }
-        });
-        if(newJson.length != 0){
-            var title = newJson[0]["タイトル"];
-            var author = newJson[0]["著者名"];
-            var pubDate = newJson[0]["出版日"];
-            var publisher = newJson[0]["出版社"];
-            var bookvalue = newJson[0]["冊数"];
-            $("#BookTitle").html(title);
-            $("#BookTitle").val(title);
-            $("#BookAuthor").html(author);
-            $("#BookAuthor").val(author);
-            $("#PublishedDate").html(pubDate);
-            $("#PublishedDate").val(pubDate);
-            $("#Publisher").html(publisher);
-            $("#Publisher").val(publisher);
-            $("#BookValue").html(bookvalue);
-            $("#BookValue").val(bookvalue);
-            document.getElementById("property").style.display = "block";
+    var json = getJsonFromHtml();
+    var newJson = json.filter(function(item, index){
+        if(item.ISBN == isbn){
+            return true;
+        }else{
+            alert("該当する書籍が見つかりません");
+            return false;
         }
     });
+    if(newJson.length != 0){
+        var title = newJson[0]["タイトル"];
+        var author = newJson[0]["著者名"];
+        var pubDate = newJson[0]["出版日"];
+        var publisher = newJson[0]["出版社"];
+        var bookvalue = newJson[0]["冊数"];
+        $("#BookTitle").html(title);
+        $("#BookTitle").val(title);
+        $("#BookAuthor").html(author);
+        $("#BookAuthor").val(author);
+        $("#PublishedDate").html(pubDate);
+        $("#PublishedDate").val(pubDate);
+        $("#Publisher").html(publisher);
+        $("#Publisher").val(publisher);
+        $("#BookValue").html(bookvalue);
+        $("#BookValue").val(bookvalue);
+        document.getElementById("property").style.display = "block";
+    }
 }
 
 // 入力されたISBNをチェックする
@@ -301,16 +298,13 @@ function registerBook(){
     }
 }
 
-// jsonをテーブルに変換する
+// Jsonをテーブルに変換する
 $(document).ready(function() {
     $.ajaxSetup({ cache: false });
-    var nowURL = location.href;
-    var current = getCurrentDir();
-    const hostURL = current + "static/data/book-list.json";
+    var jsonFile = getJsonFromHtml();
     if(nowURL.indexOf("borrow-list.html") != -1){
-        const hostURL = current + "static/data/borrow-list.json";
         $("#borrow-list").bootstrapTable({
-            url: hostURL,
+            data: jsonFile,
             cache: false,
             rowStyle: "checkOver",
             columns: [
@@ -324,19 +318,20 @@ $(document).ready(function() {
         });
     }
     if(nowURL.indexOf("history.html") != -1){
-        const hostURL = current + "static/data/history.json";
         $("#history").bootstrapTable({
-            url: hostURL,
+            data: jsonFile,
             cache: false,
             columns: [
-                {field: "貸出履歴", title: "貸出履歴"}
+                {field: "名前", title: "名前", sortable: "true"},
+                {field: "日付", title: "日付", sortable: "true"},
+                {field: "タイトル", title: "タイトル", sortable: "true"},
+                {field: "貸出/返却", title: "貸出/返却", sortable: "true"}
             ]
         });
     }
     if(nowURL.indexOf("book-list.html") != -1){
-        const hostURL = current + "static/data/book-list.json";
         $("#book-list").bootstrapTable({
-            url: hostURL,
+            data: jsonFile,
             cache: false,
             columns: [
                 {field: "タイトル", title: "タイトル", sortable: "true"},
@@ -345,11 +340,17 @@ $(document).ready(function() {
                 {field: "出版日", title: "出版日", sortable: "true", width:"110px"},
                 {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
                 {field: "冊数", title: "冊数", sortable: "true", width:"110px"},
-                {field: "貸出先", title: "貸出先", sortable: "true", width:"150px"}
             ]
         });
     }
 });
+
+// HTMLからJsonを取得
+function getJsonFromHtml(){
+    var json = $(".jsondata").text();
+    json = JSON.parse(json);
+    return json;
+}
 
 // 貸出日数が14日を超える場合、貸出リストを赤く表示
 function checkOver(row, index){
@@ -371,6 +372,7 @@ function checkDelete(){
     }
 }
 
+// 本を削除する
 function deleteBook(){
     var nowEvent = getProperty();
     var bookMaxValue = document.getElementById("BookValue").value;
