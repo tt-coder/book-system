@@ -64,10 +64,12 @@ function getCurrentDir(){
 function postToServer(isbn){
     var nowUserName = getUserName();
     var nowEvent = getProperty();
+    var nowTitle = document.getElementById("BookTitle").value;
     var data = {
             username: nowUserName,
             event: nowEvent,
-            isbn: isbn
+            isbn: isbn,
+            title: nowTitle
     };
     console.log(JSON.stringify(data));
     var hostURL = ""; // サーバーのURL
@@ -378,6 +380,7 @@ function checkDelete(){
 // 本を削除する
 function deleteBook(){
     var nowEvent = getProperty();
+    var nowTitle = document.getElementById("BookTitle").value;
     var bookMaxValue = document.getElementById("BookValue").value;
     var sendValue = bookMaxValue;
     var checkValue = false;
@@ -397,6 +400,7 @@ function deleteBook(){
         var title = document.getElementById("BookTitle").value;
         var data = {
             isbn: isbn,
+            title: nowTitle,
             event: nowEvent,
             bookvalue: sendValue
         };
