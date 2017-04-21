@@ -345,6 +345,7 @@ $(document).ready(function() {
                 {field: "出版日", title: "出版日", sortable: "true", width:"110px"},
                 {field: "ISBN", title: "ISBN", sortable: "true", width:"110px"},
                 {field: "冊数", title: "冊数", sortable: "true", width:"110px"},
+                {field: "状態", title: "状態", sortable: "true"}
             ]
         });
     }
