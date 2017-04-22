@@ -204,8 +204,12 @@ function getBookDataJson(isbn){
 // 入力されたISBNをチェックする
 function checkNumber(obj){
     var num = obj.value;
+    var len = obj.length;
     if(num.match(/[^0-9]/g)){
         alert ("半角数値で入力して下さい");
+        return false;
+    }if(len != 10 && len != 13){
+        alert ("桁数を確認してください");
         return false;
     }else{
         var nowURL = location.href;
