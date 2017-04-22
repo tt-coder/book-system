@@ -205,11 +205,25 @@ function getBookDataJson(isbn){
 function checkNumber(obj){
     var num = obj.value;
     var len = num.length;
+    function deleteValue(){
+        $("#BookTitle").html("");
+        $("#BookTitle").val("");
+        $("#BookAuthor").html("");
+        $("#BookAuthor").val("");
+        $("#PublishedDate").html("");
+        $("#PublishedDate").val("");
+        $("#Publisher").html("");
+        $("#Publisher").val("");
+        $("#BookValue").html("");
+        $("#BookValue").val("");
+    }
     if(num.match(/[^0-9]/g)){
         alert ("半角数値で入力して下さい");
+        deleteValue();
         return false;
     }if(len != 10 && len != 13){
         alert ("桁数を確認してください");
+        deleteValue();
         return false;
     }else{
         var nowURL = location.href;
