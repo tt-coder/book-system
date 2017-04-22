@@ -352,6 +352,7 @@ $(document).ready(function() {
         $("#book-list").bootstrapTable({
             data: jsonFile,
             cache: false,
+            rowStyle: "checkOver",
             columns: [
                 {field: "タイトル", title: "タイトル", sortable: "true"},
                 {field: "著者名", title: "著者名", sortable: "true"},
@@ -376,6 +377,16 @@ function getJsonFromHtml(){
 function checkOver(row, index){
     var num = parseInt(row.貸出日数,10);
     if(num >= 14){
+        return {classes: "warning"};
+    }else{
+        return {};
+    }
+}
+
+// 状態が×のときに蔵書リストを色付け
+function checkOver(row, index){
+    var status = row.状態;
+    if(status == "×"){
         return {classes: "warning"};
     }else{
         return {};
