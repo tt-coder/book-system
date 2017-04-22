@@ -159,14 +159,15 @@ function getBookData(isbn){
 // JSONから書籍情報を取得する(貸出・返却、削除で使用)
 function getBookDataJson(isbn){
     var json = getJsonFromHtml();
+    var count = 0;
     var newJson = json.filter(function(item, index){
         if(item.ISBN == isbn){
-            return true;
-        }else{
-            alert("該当する書籍が見つかりません");
-            return false;
+            count++;
         }
     });
+    if(count == 0){
+        alert("該当する書籍が見つかりません");
+    }
     if(newJson.length != 0){
         var title = newJson[0]["タイトル"];
         var author = newJson[0]["著者名"];
