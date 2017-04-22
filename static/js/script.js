@@ -170,6 +170,16 @@ function getBookDataJson(isbn){
     });
     if(count == 0){
         alert("該当する書籍が見つかりません");
+        $("#BookTitle").html("");
+        $("#BookTitle").val("");
+        $("#BookAuthor").html("");
+        $("#BookAuthor").val("");
+        $("#PublishedDate").html("");
+        $("#PublishedDate").val("");
+        $("#Publisher").html("");
+        $("#Publisher").val("");
+        $("#BookValue").html("");
+        $("#BookValue").val("");
     }
     if(newJson.length != 0){
         var title = newJson[0]["タイトル"];
@@ -400,7 +410,7 @@ function deleteBook(){
     }else{
         checkValue = true;
     }
-    if(checkValue){
+    if(checkValue && nowTitle != ""){
         var isbn = document.getElementById("jancode").value;
         var title = document.getElementById("BookTitle").value;
         var data = {
