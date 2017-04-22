@@ -163,6 +163,9 @@ function getBookDataJson(isbn){
     var newJson = json.filter(function(item, index){
         if(item.ISBN == isbn){
             count++;
+            return true;
+        }else{
+            return false;
         }
     });
     if(count == 0){
