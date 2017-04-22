@@ -352,7 +352,7 @@ $(document).ready(function() {
         $("#book-list").bootstrapTable({
             data: jsonFile,
             cache: false,
-            rowStyle: "checkOver",
+            rowStyle: "checkStatus",
             columns: [
                 {field: "タイトル", title: "タイトル", sortable: "true"},
                 {field: "著者名", title: "著者名", sortable: "true"},
@@ -384,7 +384,7 @@ function checkOver(row, index){
 }
 
 // 状態が×のときに蔵書リストを色付け
-function checkOver(row, index){
+function checkStatus(row, index){
     var status = row.状態;
     if(status == "×"){
         return {classes: "warning"};
