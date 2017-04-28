@@ -258,7 +258,7 @@ function postISBN(){
             isbn: selected
         }
         $.ajax({
-            url: hostURL,
+            url: "",
             type: "POST",
             data: JSON.stringify(data),
             timeout: 10000,
