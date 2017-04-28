@@ -268,7 +268,7 @@ function postISBN(){
             success: function(json){
                 console.log(json);
                 json = JSON.parse(json);
-                getBookDataJson(newJson);
+                getBookDataJson(json);
             }
         });
     }
