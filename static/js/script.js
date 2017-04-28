@@ -60,7 +60,7 @@ function getCurrentDir(){
     return url + getDir(local); // 現在のディレクトリ
 }
 
-// サーバーにPOST
+// サーバーに貸出・返却をPOST
 function postToServer(isbn){
     var nowUserName = getUserName();
     var nowEvent = getProperty();
@@ -236,6 +236,14 @@ function checkNumber(obj){
         }
     }
 }
+
+// セレクトにISBNをセット
+$(document).ready(function() {
+    var json = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+    $(".selectISBN").select2({
+        data: json
+    });
+});
 
 // プルダウンメニューにメンバーをセット
 function memberSet(){
