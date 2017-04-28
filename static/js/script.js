@@ -157,7 +157,8 @@ function getBookData(isbn){
 };
 
 // JSONから書籍情報を取得する(貸出・返却、削除で使用)
-function getBookDataJson(isbn){
+function getBookDataJson(newJson){
+    /*
     var json = getJsonFromHtml();
     var count = 0;
     var newJson = json.filter(function(item, index){
@@ -168,6 +169,8 @@ function getBookDataJson(isbn){
             return false;
         }
     });
+    */
+    var count = newJson.length;
     if(count == 0){
         alert("該当する書籍が見つかりません");
         $("#BookTitle").html("");
@@ -265,7 +268,7 @@ function postISBN(){
             success: function(json){
                 console.log(json);
                 json = JSON.parse(json);
-                
+                getBookDataJson(newJson);
             }
         });
     }
