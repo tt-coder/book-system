@@ -227,6 +227,7 @@ function checkNumber(obj){
         return false;
     }else{
         var nowURL = location.href;
+        console.log("OK");
         if(num != ""){
             if(nowURL.indexOf("borrow-return.html") != -1 || nowURL.indexOf("book-delete.html") != -1){
                 getBookDataJson(num);
@@ -239,11 +240,22 @@ function checkNumber(obj){
 
 // セレクトにISBNをセット
 $(document).ready(function() {
-    var json = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+    //var json = getJsonFromHtml();
+    var json = [{ id: 0, text: '1234567890' }, { id: 1, text: '1234567800' }, { id: 2, text: '1234567000' }, { id: 3, text: '1234560000' }];
     $(".selectISBN").select2({
         data: json
     });
 });
+
+// サーバーにISBNを送信
+function postISBN(){
+    var selectISBN = document.forms.selectISBN.isbn;
+    var index = selectISBN.selectedIndex;
+    var selected = selectISBN.options[index].text;
+    if(selected != "ISBNを選択してください"){
+        console.log("POST");
+    }
+}
 
 // プルダウンメニューにメンバーをセット
 function memberSet(){
