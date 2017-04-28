@@ -253,7 +253,21 @@ function postISBN(){
     var index = selectISBN.selectedIndex;
     var selected = selectISBN.options[index].text;
     if(selected != "ISBNを選択してください"){
-        console.log("POST");
+        $.ajaxSetup({ cache: false });
+        var data = {
+            isbn: selected
+        }
+        $.ajax({
+            url: hostURL,
+            type: "POST",
+            data: JSON.stringify(data),
+            timeout: 10000,
+            success: function(json){
+                console.log(json);
+                json = JSON.parse(json);
+                
+            }
+        });
     }
 }
 
