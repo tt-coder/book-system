@@ -240,8 +240,8 @@ function checkNumber(obj){
 
 // セレクトにISBNをセット
 $(document).ready(function() {
-    //var json = getJsonFromHtml();
-    var json = [{ id: 0, text: '1234567890' }, { id: 1, text: '1234567800' }, { id: 2, text: '1234567000' }, { id: 3, text: '1234560000' }];
+    var json = getJsonFromHtml();
+    //var json = [{ id: 0, text: '1234567890' }, { id: 1, text: '1234567800' }, { id: 2, text: '1234567000' }, { id: 3, text: '1234560000' }];
     $(".selectISBN").select2({
         data: json
     });
