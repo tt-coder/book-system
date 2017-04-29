@@ -58,17 +58,16 @@
                     貸出・返却
                 </div>
                 <br>
-                <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
-                <br>
-                <!--
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">ISBN</span>
-                    <input type="text" class="form-control" placeholder="スキャンまたはISBNを入力" aria-describedby="basic-addon1"
-                    id="jancode" onblur="checkNumber(this)" ></input>
-                </div>
-                -->
-                <form name="selectISBN" id="selectISBN">
+                <div>
                     <p>ISBNをスキャンもしくは選択</p>
+                    <input type="button" class="btn btn-primary btn-lg btn-block" value="スキャン" onclick="scanJAN()"></input>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">ISBN</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="jancode" disabled="disabled" onblur="checkNumber(this)" ></input>
+                    </div>
+                </div>
+                <br>
+                <form name="selectISBN" id="selectISBN">
                     <select class="form-control selectISBN" id="isbn" onchange="postISBN()">
                         <option value="delault" selected="selected">ISBNを選択してください</option>
                     </select>

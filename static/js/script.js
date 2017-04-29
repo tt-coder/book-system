@@ -158,18 +158,6 @@ function getBookData(isbn){
 
 // JSONから書籍情報を取得する(貸出・返却、削除で使用)
 function getBookDataJson(newJson){
-    /*
-    var json = getJsonFromHtml();
-    var count = 0;
-    var newJson = json.filter(function(item, index){
-        if(item.ISBN == isbn){
-            count++;
-            return true;
-        }else{
-            return false;
-        }
-    });
-    */
     var count = newJson.length;
     if(count == 0){
         alert("該当する書籍が見つかりません");
@@ -244,7 +232,7 @@ function checkNumber(obj){
 // セレクトにISBNをセット
 $(document).ready(function() {
     var json = getJsonFromHtml();
-    //var json = [{ id: 0, text: '1234567890' }, { id: 1, text: '1234567800' }, { id: 2, text: '1234567000' }, { id: 3, text: '1234560000' }];
+    //var json = [{ id: 0, text: '1000' }, { id: 1, text: '2000' }, { id: 2, text: '3000' }, { id: 3, text: '4000' }];
     $(".selectISBN").select2({
         data: json
     });
@@ -252,9 +240,7 @@ $(document).ready(function() {
 
 // サーバーにISBNを送信
 function postISBN(){
-    var selectISBN = document.forms.selectISBN.isbn;
-    var index = selectISBN.selectedIndex;
-    var selected = selectISBN.options[index].text;
+    var selected = getSelectedISBN();
     if(selected != "ISBNを選択してください"){
         $.ajaxSetup({ cache: false });
         var data = {
@@ -267,11 +253,20 @@ function postISBN(){
             timeout: 10000,
             success: function(json){
                 console.log(json);
+                document.getElementById("jancode").value = selected;
                 json = JSON.parse(json);
                 getBookDataJson(json);
             }
         });
     }
+}
+
+// 選択されたISBNを取得
+function getSelectedISBN(){
+    var selectISBN = document.forms.selectISBN.isbn;
+    var index = selectISBN.selectedIndex;
+    var selected = selectISBN.options[index].text;
+    return selected;
 }
 
 // プルダウンメニューにメンバーをセット
