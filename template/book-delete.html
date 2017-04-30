@@ -8,15 +8,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>蔵書システム</title>
-        <link rel="stylesheet" href="static/css/bootstrap.min.css">
-        <link rel="stylesheet" href="static/css/select2.min.css">
-        <link rel="stylesheet" href="static/css/main.css">
-        <script src="static/js/jquery-3.2.0.min.js"></script>
-        <script src="static/js/jquery.xdomainajax.js"></script>
-        <script src="static/js/bootstrap.min.js"></script>
-        <script src="static/js/select2.min.js"></script>
-        <script src="static/js/script.js"></script>
-        <script src="static/js/design.js"></script>
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/main.css">
+        <script src="../static/js/jquery-3.2.0.min.js"></script>
+        <script src="../static/js/jquery.xdomainajax.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="../static/js/script.js"></script>
+        <script src="../static/js/design.js"></script>
     </head>
 <body>
 <header>
@@ -55,7 +53,7 @@
         <div class="row">
             <div class="col-xs-12 col-xs-offset-0 bs-component">
                 <div>
-                    貸出・返却
+                    蔵書の削除
                 </div>
                 <br>
                 <div>
@@ -74,7 +72,7 @@
                 </form>
 
                 <!-- プロパティ -->
-                <form name="property" id="property" style="display:none" onclick="checkProperty()">
+                <form name="property" id="property" style="display:block">
                     <br>
                     <!-- 書籍情報 -->
                     <div class="text-center">
@@ -96,38 +94,35 @@
                         <span class="input-group-addon" id="basic-addon1">発行日</span>
                         <input type="text" id="PublishedDate" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">現在の冊数</span>
+                        <input type="text" id="BookValue" class="form-control" disabled="disabled" aria-describedby="basic-addon1"></input>
+                    </div>
                     <br>
                     <!-- ラジオボタン -->
                     <div class="text-center">
-                        <div class="radio">
+                        <div class="radio" onclick="checkDelete()">
                             <label>
-                                <input type="radio" name="event" id="radio1" value="borrow">貸出
+                                <input type="radio" name="event" id="radio1" value="alldelete">全て削除する
                             </label>
                             　　
                             <label>
-                                <input type="radio" name="event" id="radio2" value="return">返却
+                                <input type="radio" name="event" id="radio2" value="delete">冊数を指定して削除する
                             </label>
+                        </div>
+                        <div id="specify" style="display:none">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">削除する冊数</span>
+                                <input type="text" id="booknum" class="form-control" disabled="disabled" value="1" aria-describedby="basic-addon1"></input>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" onclick="addValue()">＋</button>
+                                    <button class="btn btn-primary" type="button" onclick="subValue()">ー</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <br>
-                    <!-- プルダウンメニュー -->
-                    <p>所属を選択してください</p>
-                    <select class="form-control" name="grade" onchange="memberSet()" >
-                        <option value = "default">選択</option>
-                        <option value = "staff">スタッフ</option>
-                        <option value = "D">D</option>
-                        <option value = "M2">M2</option>
-                        <option value = "M1">M1</option>
-                        <option value = "M0">M0</option>
-                        <option value = "B4">B4</option>
-                        <option value = "B3">B3</option>
-                    </select>
-                    <br>
-                    <p>名前を選択してください</p>
-                    <select class="form-control" name="username">
-                    </select>
-                    <br>
-                    <input type="button" class="btn btn-success btn-lg btn-block" id="runbutton" value="実行" onclick="onButtonJAN()"></input>
+                    <input type="button" class="btn btn-success btn-lg btn-block" id="runbutton" value="実行" onclick="deleteBook()"></input>
                 </form>
                 <form style="display:none">
                     <div class="jsondata">{{jsonData}}</div>
